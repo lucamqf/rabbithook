@@ -1,6 +1,5 @@
 {
   "name": "rabbithook-registry",
-  "type": "module",
   "version": "0.1.0",
   "description": "The registry for Rabbithook",
   "publishConfig": {
@@ -16,8 +15,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "nodemon --watch \"src/**\" --ext \"ts, json\" --exec \"ts-node src/index.ts\"",
-    "build": "tsc -p . && cp -R src/hooks dist/hooks",
+    "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\" --require ts-node/register",
+    "build": "tsc && cp -R src/hooks dist/hooks",
     "start": "node dist/index.js"
   },
   "keywords": [],
