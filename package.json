@@ -1,0 +1,26 @@
+{
+  "name": "rabbithook",
+  "version": "0.1.0",
+  "main": "index.js",
+  "private": true,
+  "packageManager": "pnpm@9.0.1",
+  "license": "MIT",
+  "repository": "lucamqf/rabbithook",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter www dev",
+    "build": "pnpm --filter www build",
+    "dev:cli": "pnpm --filter rabbithook dev",
+    "build:cli": "pnpm --filter rabbithook build",
+    "dev:registry": "pnpm --filter rabbithook-registry dev",
+    "build:registry": "pnpm --filter rabbithook-registry build",
+    "start:registry": "pnpm --filter rabbithook-registry start",
+    "pub:beta": "cd packages/cli && pnpm pub:beta",
+    "pub:release": "cd packages/cli && pnpm pub:release"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

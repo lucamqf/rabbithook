@@ -1,0 +1,37 @@
+{
+  "name": "rabbithook-registry",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "The registry for Rabbithook",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/radix-vue/shadcn-vue.git",
+    "directory": "packages/module"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "nodemon --watch \"src/**\" --ext \"ts, json\" --exec \"ts-node src/index.ts\"",
+    "build": "tsc -p . && cp -R src/hooks dist/hooks",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "lucamqf",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.79",
+    "nodemon": "^3.1.0",
+    "react": "^18.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
