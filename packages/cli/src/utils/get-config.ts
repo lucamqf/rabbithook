@@ -1,8 +1,8 @@
 import { existsSync, promises as fs } from "node:fs";
 import path from "pathe";
 import { z } from "zod";
-import { getSrcFolderPath } from "./get-source-folder";
-import { getPackageInfo } from "./get-package-info";
+import { getSrcFolderPath } from "src/utils/get-source-folder";
+import { getPackageInfo } from "src/utils/get-package-info";
 
 const configSchema = z.object({
   typescript: z.boolean(),

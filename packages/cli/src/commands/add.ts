@@ -1,14 +1,15 @@
-import { highlight } from './../utils/highlight';
 import { Command } from "commander";
 import path from "pathe";
 import { existsSync } from "node:fs";
 import prompts from "prompts";
-import { createFolder } from "../utils/create-folder";
-import { getExtension } from "../utils/get-extension";
-import { readConfig } from "../utils/get-config";
-import { getSrcFolderPath } from "../utils/get-source-folder";
-import { fetchHook, addHook } from "../utils/hook";
 import consola from "consola";
+import ora from 'ora';
+import { highlight } from 'src/utils/highlight';
+import { createFolder } from "src/utils/create-folder";
+import { getExtension } from "src/utils/get-extension";
+import { readConfig } from "src/utils/get-config";
+import { getSrcFolderPath } from "src/utils/get-source-folder";
+import { fetchHook, addHook } from "src/utils/hook";
 
 const hookDependencies: Record<string, string[]> = {
   useHover: ["useEventListener"],
@@ -31,6 +32,7 @@ export const add = new Command()
       const outputFolder = await createFolder(userSrcFolder, config.destination);
       
       for (const hook of hooks) {
+        const spinner = ora().start(`Adding ${highlight(hook)}...`);
         const outputFile = path.join(outputFolder, `${hook}.${fileExtension}`);
   
         if (existsSync(outputFile)) {
@@ -53,6 +55,7 @@ export const add = new Command()
           continue;
         }
         
+        spinner.stop();
         await addHook(outputFile, fetchedHook);
       }
     } catch (error: any) {
@@ -88,14 +91,19 @@ async function handleDependencies(hook: string, fileExtension: string, outputFol
       }
       
       dependantHooks.forEach(async (dependency) => {
+        
         const hookPath = path.join(outputFolder, dependency);
         
         if (!existsSync(hookPath)) {
+          const spinner = ora().start(`Adding ${highlight(dependency.replace(/\.(ts|js)/gi, ""))}...`);
+
           const hook = await fetchHook(dependency);
           
           if (hook) {
             await addHook(hookPath, hook);
           }
+
+          spinner.stop();
         }
       })
 

@@ -1,12 +1,13 @@
-import { highlight } from './../utils/highlight';
 import { Command } from 'commander';
 import path from 'path';
 import { promises as fs } from 'fs';
 import prompts from 'prompts';
-import { getSrcFolderPath } from '../utils/get-source-folder';
 import consola from 'consola';
 import { colors } from 'consola/utils';
+import ora from "ora";
 import { handleError } from 'src/utils/handle-error';
+import { highlight } from 'src/utils/highlight';
+import { getSrcFolderPath } from 'src/utils/get-source-folder';
 
 export const init = new Command()
   .name("init")
@@ -29,7 +30,9 @@ export const init = new Command()
           initial: 'hooks',
         },
       ])
-  
+      
+      const spinner = ora().start("Initializing...")
+
       const sourceFolder = await getSrcFolderPath(process.cwd());
   
       const config = {
@@ -38,9 +41,11 @@ export const init = new Command()
       };
   
       const configPath = path.join(sourceFolder, '..', 'hooks.json');
-  
+      
+      spinner.text = "Writing config file..."
       await fs.writeFile(configPath, JSON.stringify(config, null, 2));
-  
+      
+      spinner.stop();
       consola.log(
         `${colors.green('Success!')} Project initialization completed.`,
       )

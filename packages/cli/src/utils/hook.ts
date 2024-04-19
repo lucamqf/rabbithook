@@ -1,6 +1,6 @@
 import consola from "consola";
 import { promises as fs } from "node:fs";
-import { fetchRegistry } from "./registry";
+import { fetchRegistry } from "src/utils/registry";
 
 export async function addHook(file: string, content: string): Promise<void> {
   const rawFileName = file.split('/').pop() ?? "";

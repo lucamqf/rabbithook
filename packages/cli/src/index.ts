@@ -2,10 +2,10 @@
 import process from "node:process";
 import { Command } from "commander";
 
-import { add } from "./commands/add";
-import { init } from "./commands/init";
-import { list } from "./commands/list";
-import { getPackageInfo } from "./utils/get-package-info";
+import { add } from "src/commands/add";
+import { init } from "src/commands/init";
+import { list } from "src/commands/list";
+import { getPackageInfo } from "src/utils/get-package-info";
 
 process.on('SIGINT', () => process.exit(0))
 process.on('SIGTERM', () => process.exit(0))
