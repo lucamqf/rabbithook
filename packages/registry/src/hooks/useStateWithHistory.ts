@@ -1,6 +1,17 @@
 import { useState, useRef, useCallback } from "react";
 
-function useStateWithHistory<T>(defaultValue: T, { capacity = 10 } = {}) {
+type IUseStateWithHistory<T> = [
+  T, 
+  (v: T | ((currentValue: T) => T)) => void, 
+  {
+    history: T[];
+    pointer: number;
+    back: () => void;
+    forward: () => void;
+    go: (index: number) => void;
+  }
+];
+function useStateWithHistory<T>(defaultValue: T, { capacity = 10 } = {}):IUseStateWithHistory<T> {
 	const [value, setValue] = useState(defaultValue);
 	const historyRef = useRef([value])
 	const pointerRef = useRef(0)
