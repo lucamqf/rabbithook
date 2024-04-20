@@ -11,7 +11,7 @@ function useArray(defaultValue) {
 		setArray(prevValue => [
 			...prevValue.slice(0, index),
 			newElement,
-			...prevValue.slice(index + 1, prevValue.length - 1)
+			...prevValue.slice(index + 1, prevValue.length)
 		])
 	}
 
