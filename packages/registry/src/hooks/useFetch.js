@@ -8,7 +8,8 @@ function useFetch(url, options = {}, dependencies = []) {
   return useAsync(async () => {
     return fetch(url, { ...DEFAULT_OPTIONS, ...options }).then(async res => {
       if (res.ok) return res.json();
-      return res.json().then(json => Promise.reject(json))
+
+      return res.json().then(json => Promise.reject(json));
     })
   }, dependencies)
 }

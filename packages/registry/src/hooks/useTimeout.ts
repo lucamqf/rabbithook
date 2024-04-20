@@ -5,29 +5,28 @@ function useTimeout(callback: Function, delay: number) {
 	const timeoutRef = useRef<NodeJS.Timeout>()
 
 	useEffect(() => {
-		callbackRef.current = callback
+		callbackRef.current = callback;
 	}, [callback])
 
 	const set = useCallback(() => {
-		timeoutRef.current = setTimeout(() => callbackRef.current(), delay)
+		timeoutRef.current = setTimeout(() => callbackRef.current(), delay);
 	}, [delay])
 
 	const clear = useCallback(() => {
-		timeoutRef.current && clearTimeout(timeoutRef.current)
+		timeoutRef.current && clearTimeout(timeoutRef.current);
 	}, [])
 
 	useEffect(() => {
-		set()
-		return clear
+		set();
+		return clear;
 	}, [delay, set, clear])
 
 	const reset = useCallback(() => {
-		clear()
-		set()
+		clear();
+		set();
 	}, [clear, set])
 
 	return { reset, clear }
 }
-
 
 export default useTimeout;

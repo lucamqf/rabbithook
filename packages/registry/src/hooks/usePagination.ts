@@ -15,10 +15,9 @@ function usePagination({ contentPerPage, count }: IUsePagination) {
     return () => {
       setPage(prevPage => {
         if (direction === 'next') {
-
           if (prevPage === pageCount) return prevPage;
 
-          return prevPage++
+          return prevPage++;
         }
 
         if (direction === 'previous') {
@@ -27,7 +26,7 @@ function usePagination({ contentPerPage, count }: IUsePagination) {
           return prevPage--;
         }
 
-        return prevPage
+        return prevPage;
       });
     }
   };

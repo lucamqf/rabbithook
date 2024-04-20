@@ -17,7 +17,7 @@ const getOrientation = () => {
   return null;
 }
 
-function useOrientation(initialState: IOrientation = defaultValue) {
+function useOrientation(initialState: IOrientation = defaultValue): IOrientation {
   const [orientation, setOrientation] = useState(getOrientation() || initialState);
 
   function handleChange() {

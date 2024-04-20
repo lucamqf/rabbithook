@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 function useMount(callback: Function) {
 	useEffect(() => {
-		callback()
+		callback();
 	}, [])
 }
 
