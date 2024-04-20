@@ -17,6 +17,7 @@ const hookDependencies: Record<string, string[]> = {
   useOnlineStatus: ["useEventListener"],
   useOrientation: ["useEventListener"],
   useLongPress: ["useEventListener", "useTimeout"],
+  useFetch: ["useAsync"]
 }
 
 export const add = new Command()
