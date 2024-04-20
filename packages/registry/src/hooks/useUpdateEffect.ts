@@ -1,15 +1,15 @@
 import { useRef, useEffect } from "react"
 
 function useUpdateEffect(callback: Function, dependencies: any[]) {
-	const firstRenderRef = useRef(true)
+	const firstRenderRef = useRef(true);
 
 	useEffect(() => {
 		if (firstRenderRef.current) {
-			firstRenderRef.current = false
-			return
+			firstRenderRef.current = false;
+			return;
 		}
 
-		return callback()
+		return callback();
 	}, dependencies)
 }
 

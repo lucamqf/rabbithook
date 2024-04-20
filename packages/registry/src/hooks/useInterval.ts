@@ -10,33 +10,33 @@ export function useInterval<T extends () => void>(
   delay: number,
   { immediate, startPaused }: Partial<UseIntervalOptions> = { immediate = false, startPaused = false }
 ) {
-  const savedCallback = useRef(callback)
-  const tickId = useRef<NodeJS.Timeout>()
+  const savedCallback = useRef(callback);
+  const tickId = useRef<NodeJS.Timeout>();
 
   function start() {
     if (!tickId.current) {
-      tickId.current = setInterval(() => savedCallback.current(), delay)
+      tickId.current = setInterval(() => savedCallback.current(), delay);
     }
   }
 
   function stop() {
     if (tickId.current) {
-      clearInterval(tickId.current)
+      clearInterval(tickId.current);
       tickId.current = undefined;
     }
   }
 
   useEffect(() => {
-    savedCallback.current = callback
+    savedCallback.current = callback;
 
-    if (!paused && immediate) {
-      callback()
+    if (immediate) {
+      callback();
     }
-  }, [callback, immediate, paused])
+  }, [callback, immediate])
 
   useEffect(() => {
     if (!tickId.current && startPaused) {
-      return
+      return;
     }
 
     start();

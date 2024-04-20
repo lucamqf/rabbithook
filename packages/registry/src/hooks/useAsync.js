@@ -1,14 +1,14 @@
 import { useCallback, useState, useEffect } from "react"
 
 function useAsync(callback, dependencies = []) {
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState(null)
-	const [value, setValue] = useState(null)
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [value, setValue] = useState(null);
 
 	const callbackMemoized = useCallback(() => {
-		setLoading(true)
-		setError(null)
-		setValue(null)
+		setLoading(true);
+		setError(null);
+		setValue(null);
 		callback()
 			.then(setValue)
 			.catch(setError)
@@ -16,7 +16,7 @@ function useAsync(callback, dependencies = []) {
 	}, dependencies)
 
 	useEffect(() => {
-		callbackMemoized()
+		callbackMemoized();
 	}, [callbackMemoized])
 
 	return { loading, error, value }

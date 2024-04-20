@@ -7,14 +7,14 @@ type AsyncState<T> = {
 }
 
 function useAsync<T>(callback: () => Promise<T>, dependencies: unknown[] = []): AsyncState<T> {
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [value, setValue] = useState<T | null>(null)
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [value, setValue] = useState<T | null>(null);
 
   const callbackMemoized = useCallback(() => {
-    setLoading(true)
-    setError(null)
-    setValue(null)
+    setLoading(true);
+    setError(null);
+    setValue(null);
     callback()
       .then(setValue)
       .catch(setError)
@@ -22,7 +22,7 @@ function useAsync<T>(callback: () => Promise<T>, dependencies: unknown[] = []): 
   }, [...dependencies, callback])
 
   useEffect(() => {
-    callbackMemoized()
+    callbackMemoized();
   }, [callbackMemoized])
 
   return { loading, error, value }

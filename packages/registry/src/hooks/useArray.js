@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 function useArray(defaultValue) {
-	const [array, setArray] = useState(defaultValue)
+	const [array, setArray] = useState(defaultValue);
 
-	const push = (element) => setArray((prevValue) => [...prevValue, element])
+	const push = (element) => setArray((prevValue) => [...prevValue, element]);
 
-	const filter = (callback) => setArray(a => a.filter(callback))
+	const filter = (callback) => setArray(a => a.filter(callback));
 
 	const update = (index, newElement) => {
 		setArray(prevValue => [
@@ -22,7 +22,7 @@ function useArray(defaultValue) {
 		])
 	}
 
-	const clear = () => setArray([])
+	const clear = () => setArray([]);
 
 	return { array, set: setArray, push, filter, update, remove, clear }
 }

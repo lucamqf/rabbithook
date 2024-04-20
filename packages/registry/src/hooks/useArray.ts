@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 function useArray<T = unknown>(defaultValue: T[]) {
-	const [array, setArray] = useState(defaultValue)
+	const [array, setArray] = useState(defaultValue);
 
-	const push = (element: T) => setArray((prevValue: T[]) => [...prevValue, element])
+	const push = (element: T) => setArray((prevValue: T[]) => [...prevValue, element]);
 
-	const filter = (callback: (value: T, index: number, array: T[]) => boolean) => setArray(a => a.filter(callback))
+	const filter = (callback: (value: T, index: number, array: T[]) => boolean) => setArray(a => a.filter(callback));
 
 	const update = (index: number, newElement: T) => {
 		setArray(prevValue => [
@@ -22,7 +22,7 @@ function useArray<T = unknown>(defaultValue: T[]) {
 		])
 	}
 
-	const clear = () => setArray([])
+	const clear = () => setArray([]);
 
 	return { array, set: setArray, push, filter, update, remove, clear }
 }

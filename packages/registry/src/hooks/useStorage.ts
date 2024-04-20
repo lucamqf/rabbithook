@@ -4,33 +4,33 @@ type IUseStorageReturnType<T> = [T | null, Dispatch<SetStateAction<T | null>>, (
 type IStorageType = typeof localStorage | typeof sessionStorage;
 
 function useLocalStorage<T>(key: string, defaultValue: T): IUseStorageReturnType<T> {
-	return useStorage(key, defaultValue, window.localStorage)
+	return useStorage(key, defaultValue, window.localStorage);
 }
 
 function useSessionStorage<T>(key: string, defaultValue: T): IUseStorageReturnType<T> {
-	return useStorage(key, defaultValue, window.sessionStorage)
+	return useStorage(key, defaultValue, window.sessionStorage);
 }
 
 function useStorage<T>(key: string, defaultValue: T, storageObject: IStorageType): IUseStorageReturnType<T> {
 	const [value, setValue] = useState<T | null>(() => {
-		const jsonValue = storageObject.getItem(key)
+		const jsonValue = storageObject.getItem(key);
 
-		if (jsonValue != null) return JSON.parse(jsonValue)
+		if (jsonValue != null) return JSON.parse(jsonValue);
 
 		if (typeof defaultValue === 'function') {
-			return defaultValue()
+			return defaultValue();
 		}
 
 		return defaultValue;
 	});
 
 	useEffect(() => {
-		if (value === undefined) return storageObject.removeItem(key)
-		storageObject.setItem(key, JSON.stringify(value))
+		if (value === undefined) return storageObject.removeItem(key);
+		storageObject.setItem(key, JSON.stringify(value));
 	}, [key, value, storageObject])
 
 	const remove = useCallback(() => {
-		setValue(null)
+		setValue(null);
 	}, [])
 
 	return [value, setValue, remove]

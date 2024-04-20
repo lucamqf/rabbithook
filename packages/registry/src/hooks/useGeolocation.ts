@@ -13,32 +13,32 @@ type IGeolocation = {
 }
 
 function useGeolocation({ options, shouldWatch = false }: IUseGeolocationProps = {}) {
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState<GeolocationPositionError | null>(null)
-	const [data, setData] = useState({} as IGeolocation)
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<GeolocationPositionError | null>(null);
+	const [data, setData] = useState({} as IGeolocation);
 
 	useEffect(() => {
 		const successHandler = (event: GeolocationPosition) => {
 			const { latitude, longitude, altitude, speed } = event.coords;
-			setLoading(false)
-			setError(null)
-			setData({ latitude, longitude, altitude, speed })
+			setLoading(false);
+			setError(null);
+			setData({ latitude, longitude, altitude, speed });
 		}
 
 		const errorHandler = (error: GeolocationPositionError) => {
-			setLoading(false)
-			setError(error)
+			setLoading(false);
+			setError(error);
 		}
 
 		if (shouldWatch) {
-			navigator.geolocation.getCurrentPosition(successHandler, errorHandler, options)
-			const id = navigator.geolocation.watchPosition(successHandler, errorHandler, options)
+			navigator.geolocation.getCurrentPosition(successHandler, errorHandler, options);
+			const id = navigator.geolocation.watchPosition(successHandler, errorHandler, options);
 
-			return () => navigator.geolocation.clearWatch(id)
+			return () => navigator.geolocation.clearWatch(id);
 		}
 	}, [options])
 
-	return { loading, error, data }
+	return { loading, error, data };
 }
 
 
