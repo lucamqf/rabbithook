@@ -11,3 +11,5 @@ function usePrevious(value) {
 
 	return previousRef.current
 }
+
+export default usePrevious;

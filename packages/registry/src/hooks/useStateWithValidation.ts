@@ -16,5 +16,4 @@ function useStateWithValidation<T>(validationFunc: (value: T) => boolean, initia
 	return [state, onChange, isValid];
 }
 
-
 export default useStateWithValidation;

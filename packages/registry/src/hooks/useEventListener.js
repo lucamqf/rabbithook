@@ -18,5 +18,4 @@ function useEventListener(eventType, callback, element = window) {
   }, [eventType, element])
 }
 
-
 export default useEventListener;

@@ -63,5 +63,4 @@ function useStateWithHistory(defaultValue, { capacity = 10 } = {}) {
   ];
 }
 
-
 export default useStateWithHistory;

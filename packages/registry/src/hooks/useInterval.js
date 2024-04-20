@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-export function useInterval(
+function useInterval(
   callback,
   delay,
   { immediate = false, startPaused = false } = {}
@@ -44,3 +44,5 @@ export function useInterval(
     stopTimer: stop,
   }
 }
+
+export default useInterval;

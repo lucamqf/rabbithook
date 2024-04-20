@@ -29,5 +29,4 @@ function useGeolocation({ options, shouldWatch = false }) {
   return { loading, error, data };
 }
 
-
 export default useGeolocation;

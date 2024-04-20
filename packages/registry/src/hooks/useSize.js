@@ -15,5 +15,4 @@ function useSize(ref) {
   return size;
 }
 
-
 export default useSize;

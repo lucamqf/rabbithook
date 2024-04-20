@@ -29,5 +29,4 @@ function useTimeout(callback, delay) {
   return { reset, clear };
 }
 
-
 export default useTimeout;

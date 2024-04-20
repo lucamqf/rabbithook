@@ -5,7 +5,7 @@ type UseIntervalOptions = {
   startPaused: boolean
 }
 
-export function useInterval<T extends () => void>(
+function useInterval<T extends () => void>(
   callback: T,
   delay: number,
   { immediate, startPaused }: Partial<UseIntervalOptions> = { immediate = false, startPaused = false }
@@ -49,3 +49,5 @@ export function useInterval<T extends () => void>(
     stopTimer: stop,
   }
 }
+
+export default useInterval;

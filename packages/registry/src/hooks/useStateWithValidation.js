@@ -14,5 +14,4 @@ function useStateWithValidation(validationFunc, initialValue) {
   return [state, onChange, isValid];
 }
 
-
 export default useStateWithValidation;

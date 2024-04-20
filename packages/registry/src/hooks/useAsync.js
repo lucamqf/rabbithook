@@ -21,3 +21,5 @@ function useAsync(callback, dependencies = []) {
 
 	return { loading, error, value }
 }
+
+export default useAsync;

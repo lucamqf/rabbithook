@@ -10,5 +10,4 @@ function useHover(ref) {
   return hovered;
 }
 
-
 export default useHover;

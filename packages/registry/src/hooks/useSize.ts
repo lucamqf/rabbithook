@@ -26,5 +26,4 @@ function useSize(ref: RefObject<Element>) {
 	return size;
 }
 
-
 export default useSize;
