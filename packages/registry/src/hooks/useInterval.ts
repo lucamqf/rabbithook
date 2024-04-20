@@ -2,17 +2,29 @@ import { useEffect, useRef } from 'react'
 
 type UseIntervalOptions = {
   immediate: boolean
-  paused: boolean
+  startPaused: boolean
 }
 
 export function useInterval<T extends () => void>(
   callback: T,
   delay: number,
-  options?: Partial<UseIntervalOptions>
+  { immediate, startPaused }: Partial<UseIntervalOptions> = { immediate = false, startPaused = false }
 ) {
-  const { immediate = false, paused = false } = options || {}
   const savedCallback = useRef(callback)
   const tickId = useRef<NodeJS.Timeout>()
+
+  function start() {
+    if (!tickId.current) {
+      tickId.current = setInterval(() => savedCallback.current(), delay)
+    }
+  }
+
+  function stop() {
+    if (tickId.current) {
+      clearInterval(tickId.current)
+      tickId.current = undefined;
+    }
+  }
 
   useEffect(() => {
     savedCallback.current = callback
@@ -23,13 +35,17 @@ export function useInterval<T extends () => void>(
   }, [callback, immediate, paused])
 
   useEffect(() => {
-    if (tickId.current && paused) {
-      clearInterval(tickId.current)
+    if (!tickId.current && startPaused) {
       return
     }
 
-    tickId.current = setInterval(() => savedCallback.current(), delay)
+    start();
 
-    return () => tickId.current && clearInterval(tickId.current)
-  }, [delay, paused])
+    return stop;
+  }, [delay, startPaused])
+
+  return {
+    startTimer: start,
+    stopTimer: stop,
+  }
 }
