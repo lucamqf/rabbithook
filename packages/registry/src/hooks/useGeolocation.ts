@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react"
 
-type IUseGeolocationProps = {
-	options?: PositionOptions
-	shouldWatch?: boolean;
-}
+type IUseGeolocationProps = PositionOptions;
 
 type IGeolocation = {
 	latitude: number;
@@ -12,8 +9,9 @@ type IGeolocation = {
 	speed: number | null;
 }
 
-function useGeolocation({ options, shouldWatch = false }: IUseGeolocationProps = {}) {
-  const [loading, setLoading] = useState(true);
+
+function useGeolocation(options?: IUseGeolocationProps = {}) {
+	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<GeolocationPositionError | null>(null);
 	const [data, setData] = useState({} as IGeolocation);
 
@@ -30,12 +28,11 @@ function useGeolocation({ options, shouldWatch = false }: IUseGeolocationProps =
 			setError(error);
 		}
 
-		if (shouldWatch) {
-			navigator.geolocation.getCurrentPosition(successHandler, errorHandler, options);
-			const id = navigator.geolocation.watchPosition(successHandler, errorHandler, options);
+		navigator.geolocation.getCurrentPosition(successHandler, errorHandler, options);
+		const id = navigator.geolocation.watchPosition(successHandler, errorHandler, options);
 
-			return () => navigator.geolocation.clearWatch(id);
-		}
+		return () => navigator.geolocation.clearWatch(id);
+
 	}, [options])
 
 	return { loading, error, data };
