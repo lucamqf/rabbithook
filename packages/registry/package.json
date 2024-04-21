@@ -8,15 +8,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/radix-vue/shadcn-vue.git",
-    "directory": "packages/module"
+    "url": "https://github.com/lucamqf/rabbithook.git",
+    "directory": "packages/registry"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\" --require ts-node/register",
-    "build": "tsc && cp -R src/hooks dist/hooks",
+    "build": "tsc && rm -rf dist/hooks && cp -R src/hooks dist/hooks",
     "start": "node dist/index.js"
   },
   "keywords": [],

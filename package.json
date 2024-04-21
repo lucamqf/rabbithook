@@ -5,7 +5,10 @@
   "private": true,
   "packageManager": "pnpm@9.0.1",
   "license": "MIT",
-  "repository": "lucamqf/rabbithook",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucamqf/rabbithook.git"
+  },
   "workspaces": [
     "packages/*"
   ],
