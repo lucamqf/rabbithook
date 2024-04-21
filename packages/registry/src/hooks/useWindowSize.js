@@ -14,8 +14,7 @@ function useWindowSize() {
     })
   })
 
-  return windowSize
+  return windowSize;
 }
-
 
 export default useWindowSize;

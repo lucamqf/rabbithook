@@ -9,6 +9,7 @@ type IGeolocation = {
 	speed: number | null;
 }
 
+
 function useGeolocation(options?: IUseGeolocationProps = {}) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<GeolocationPositionError | null>(null);
@@ -31,10 +32,10 @@ function useGeolocation(options?: IUseGeolocationProps = {}) {
 		const id = navigator.geolocation.watchPosition(successHandler, errorHandler, options);
 
 		return () => navigator.geolocation.clearWatch(id);
+
 	}, [options])
 
-	return { loading, error, data }
+	return { loading, error, data };
 }
-
 
 export default useGeolocation;

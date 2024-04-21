@@ -10,7 +10,6 @@ function usePagination({ contentPerPage, count }) {
     return () => {
       setPage(prevPage => {
         if (direction === 'next') {
-
           if (prevPage === pageCount) return prevPage;
 
           return prevPage++
