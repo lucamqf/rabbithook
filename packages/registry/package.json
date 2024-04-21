@@ -1,6 +1,6 @@
 {
   "name": "rabbithook-registry",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "The registry for Rabbithook",
   "publishConfig": {
     "access": "public"

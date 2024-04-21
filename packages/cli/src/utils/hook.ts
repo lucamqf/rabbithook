@@ -9,8 +9,6 @@ export async function addHook(file: string, content: string): Promise<void> {
 
   try {
     await fs.writeFile(file, content);
-
-    consola.success(`${fileName} added successfully.`);
   } catch (err) {
     throw new Error(`Error adding ${fileName}.`);
   }
