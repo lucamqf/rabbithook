@@ -1,30 +1,48 @@
 import { useEffect, useRef } from 'react'
 
-export function useInterval(
+function useInterval(
   callback,
   delay,
-  options
+  { immediate = false, startPaused = false } = {}
 ) {
-  const { immediate = false, paused = false } = options || {}
-  const savedCallback = useRef(callback)
-  const tickId = useRef()
+  const savedCallback = useRef(callback);
+  const tickId = useRef();
+
+  function start() {
+    if (!tickId.current) {
+      tickId.current = setInterval(() => savedCallback.current(), delay);
+    }
+  }
+
+  function stop() {
+    if (tickId.current) {
+      clearInterval(tickId.current);
+      tickId.current = undefined;
+    }
+  }
 
   useEffect(() => {
     savedCallback.current = callback
 
-    if (!paused && immediate) {
-      callback()
+    if (immediate) {
+      callback();
     }
-  }, [callback, immediate, paused])
+  }, [callback, immediate])
 
   useEffect(() => {
-    if (tickId.current && paused) {
-      clearInterval(tickId.current)
-      return
+    if (!tickId.current && startPaused) {
+      return;
     }
 
-    tickId.current = setInterval(() => savedCallback.current(), delay)
+    start();
 
-    return () => tickId.current && clearInterval(tickId.current)
-  }, [delay, paused])
+    return stop;
+  }, [delay, startPaused])
+
+  return {
+    startTimer: start,
+    stopTimer: stop,
+  }
 }
+
+export default useInterval;
