@@ -1,3 +1,10 @@
+<p align="center">
+ <img align="center" src="https://raw.githubusercontent.com/lucamqf/rabbithook/apps/www/src/public/logo.svg" height="96" />
+ <h1 align="center">
+  rabbithook
+ </h1>
+</p>
+
 # Rabbithook
 
 Welcome to the **Rabbithook** Monorepo! This repository contains the source code for the Rabbithook project, a comprehensive toolset designed for simplifying the use of React hooks. Rabbithook is inspired by Shadcn, but tailored for managing and adding hooks to your React projects with ease.
