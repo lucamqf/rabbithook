@@ -1,8 +1,5 @@
 <p align="center">
- <img align="center" src="https://raw.githubusercontent.com/lucamqf/rabbithook/main/apps/www/src/public/logo.svg" height="96" />
- <h1 align="center">
-  Rabbithook
- </h1>
+ <img align="center" src="https://raw.githubusercontent.com/lucamqf/rabbithook/main/apps/www/src/public/logo.svg" width="400" />
 </p>
 
 # Rabbithook
