@@ -1,5 +1,4 @@
 <p align="center">
- https://raw.githubusercontent.com/lucamqf/rabbithook/main/apps/www/src/public/logo.svg
  <img align="center" src="https://raw.githubusercontent.com/lucamqf/rabbithook/main/apps/www/src/public/logo.svg" height="96" />
  <h1 align="center">
   Rabbithook
