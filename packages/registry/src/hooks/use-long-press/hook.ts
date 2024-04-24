@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import useEventListener from "./useEventListener"
+import useEventListener from "./use-event-listener"
 import useTimeout from "./useTimeout"
 
 function useLongPress(ref:React.RefObject<Element>, cb: Function, { delay = 250 } = {}) {

@@ -1,10 +1,5 @@
 import { useState } from "react";
-import useEventListener from "./useEventListener";
-
-interface IOrientation {
-  angle: number;
-  type: string;
-}
+import useEventListener from "./use-event-listener";
 
 const defaultValue = { angle: 0, type: "landscape-primary" };
 
@@ -17,7 +12,7 @@ const getOrientation = () => {
   return null;
 }
 
-function useOrientation(initialState: IOrientation = defaultValue): IOrientation {
+function useOrientation(initialState = defaultValue) {
   const [orientation, setOrientation] = useState(getOrientation() || initialState);
 
   function handleChange() {

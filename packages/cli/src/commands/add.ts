@@ -1,27 +1,30 @@
 import { Command } from "commander";
-import path from "pathe";
-import { existsSync } from "node:fs";
-import prompts from "prompts";
 import consola from "consola";
+import { existsSync } from "node:fs";
 import ora from 'ora';
-import { highlight } from 'src/utils/highlight';
+import path from "pathe";
+import prompts from "prompts";
+import { EnCasings } from "src/config/casings";
+import { hookDependencies } from "src/config/dependencies";
 import { createFolder } from "src/utils/create-folder";
-import { getExtension } from "src/utils/get-extension";
+import { toKebabCase } from "src/utils/formatters";
+import { removeExtension } from "src/utils/formatters/remove-extension";
 import { readConfig } from "src/utils/get-config";
+import { getExtension } from "src/utils/get-extension";
 import { getSrcFolderPath } from "src/utils/get-source-folder";
-import { fetchHook, addHook } from "src/utils/hook";
+import { handleError } from "src/utils/handle-error";
+import { highlight } from 'src/utils/highlight';
+import { addHook, fetchHook, getCasedHookName } from "src/utils/hook";
+import { replaceImportsToCasing } from "src/utils/hook/replace-imports-to-casing";
 
-const hookDependencies: Record<string, string[]> = {
-  useHover: ["useEventListener"],
-  useWindowSize: ["useEventListener"],
-  useOnlineStatus: ["useEventListener"],
-  useOrientation: ["useEventListener"],
-  useLongPress: ["useEventListener", "useTimeout"],
-  useFetch: ["useAsync"],
-};
-
-async function fetchAndAddHook(hookName: string, fileExtension: string, outputFolder: string) {
+async function fetchAndAddHook({
+  hookName,
+  fileExtension,
+  casing,
+  outputFolder
+}: { hookName: string, fileExtension: string, casing: EnCasings, outputFolder: string}) {
   const outputFile = path.join(outputFolder, `${hookName}.${fileExtension}`);
+
   const spinner = ora().start(`Fetching ${highlight(hookName)}...`);
 
   if (existsSync(outputFile)) {
@@ -30,7 +33,10 @@ async function fetchAndAddHook(hookName: string, fileExtension: string, outputFo
     return true;
   }
 
-  const fetchedHook = await fetchHook(`${hookName}.${fileExtension}`);
+  const projectLevelHookName = toKebabCase(hookName)
+
+  // const fetchedHook = await fetchHook(`${projectLevelHookName}/hook.${fileExtension}`);
+  const fetchedHook = await fetchHook(`hook/${projectLevelHookName}.${fileExtension}`);
 
   if (!fetchedHook) {
     spinner.fail(`${highlight(hookName)} not found. Please check the name and try again.`);
@@ -38,25 +44,29 @@ async function fetchAndAddHook(hookName: string, fileExtension: string, outputFo
     return false;
   }
 
-  await addHook(outputFile, fetchedHook);
+  const hookWithCorrectImports = replaceImportsToCasing(fetchedHook, casing);
+
+  await addHook(outputFile, hookWithCorrectImports);
+
   spinner.succeed(`${highlight(hookName)} added to the project!`);
 
   return true;
 }
 
-async function handleDependencies(
-  hookName: string,
-  fileExtension: string,
-  outputFolder: string
-): Promise<boolean> {
-  const dependencies = hookDependencies[hookName] ?? [];
+async function handleDependencies({
+  hookName,
+  fileExtension,
+  casing,
+  outputFolder
+}: { hookName: string, fileExtension: string, casing: EnCasings, outputFolder: string }): Promise<boolean> {
+  const projectLevelHookName = toKebabCase(hookName);
+  const dependencies = hookDependencies[projectLevelHookName] ?? [];
 
   if (dependencies.length === 0) return true;
 
   const formatter = new Intl.ListFormat("en", { style: "long", type: "conjunction" });
-  
-  const dependencyNames = dependencies.map((dep) => `${dep}.${fileExtension}`);
-  const highlightedNames = formatter.format(dependencyNames.map((dep) => highlight(dep.split(".")[0])));
+  const dependencyNames = dependencies.map(dependency => `${getCasedHookName(dependency, casing)}.${fileExtension}`);
+  const highlightedNames = formatter.format(dependencyNames.map(dep => highlight(removeExtension(dep))));
 
   const response = await prompts({
     type: "toggle",
@@ -70,7 +80,11 @@ async function handleDependencies(
   if (!response.installDependencies) return false;
 
   for (const dependency of dependencyNames) {
-    if (!(await fetchAndAddHook(dependency.split(".")[0], fileExtension, outputFolder))) {
+    const hookNameWithoutExtension = removeExtension(dependency);
+
+    const fetchedSuccessfully = await fetchAndAddHook({ hookName: hookNameWithoutExtension, fileExtension, casing, outputFolder });
+
+    if (!fetchedSuccessfully) {
       return false;
     }
   }
@@ -90,14 +104,18 @@ export const add = new Command()
       const outputFolder = await createFolder(userSrcFolder, config.destination);
 
       for (const hook of hooks) {
-        if (!(await handleDependencies(hook, fileExtension, outputFolder))) {
-          consola.warn(`Skipping ${highlight(hook)} due to dependency issues.`);
+        const hookNameInCasing =  getCasedHookName(hook, config.casing);
+
+        const dependenciesHandledSuccessfully = await handleDependencies({ hookName: hookNameInCasing, fileExtension, casing: config.casing, outputFolder });
+
+        if (!dependenciesHandledSuccessfully) {
+          consola.warn(`Skipping ${highlight(hookNameInCasing)} due to dependency issues.`);
           continue;
         }
 
-        await fetchAndAddHook(hook, fileExtension, outputFolder);
+        await fetchAndAddHook({ hookName: hookNameInCasing, fileExtension, casing: config.casing, outputFolder });
       }
     } catch (error: any) {
-      consola.error(`An error occurred: ${error.message}`);
+      handleError(error);
     }
   });

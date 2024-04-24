@@ -8,7 +8,7 @@ type UseIntervalOptions = {
 function useInterval<T extends () => void>(
   callback: T,
   delay: number,
-  { immediate, startPaused }: Partial<UseIntervalOptions> = { immediate = false, startPaused = false }
+  { immediate, startPaused }: Partial<UseIntervalOptions> = { immediate: false, startPaused: false }
 ) {
   const savedCallback = useRef(callback);
   const tickId = useRef<NodeJS.Timeout>();

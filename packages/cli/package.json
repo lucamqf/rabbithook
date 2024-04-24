@@ -25,10 +25,10 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc --noEmit",
-    "start": "node dist/index.js",
+    "start": "pnpm build && node dist/index.js",
+    "dev": "REGISTRY_URL=http://localhost:3000 pnpm start",
     "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta",
     "pub:next": "pnpm build && pnpm publish --no-git-checks --access public --tag next",
     "pub:release": "pnpm build && pnpm publish --access public"

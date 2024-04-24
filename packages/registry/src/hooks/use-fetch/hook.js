@@ -1,11 +1,11 @@
-import useAsync from "./useAsync"
+import useAsync from "./use-async"
 
 const DEFAULT_OPTIONS = {
   headers: { "Content-Type": "application/json" }
 }
 
-function useFetch<T>(url: string, options: RequestInit = {}, dependencies: unknown[] = []) {
-  return useAsync<T>(async () => {
+function useFetch(url, options = {}, dependencies = []) {
+  return useAsync(async () => {
     return fetch(url, { ...DEFAULT_OPTIONS, ...options }).then(async res => {
       if (res.ok) return res.json();
 
