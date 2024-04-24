@@ -9,13 +9,13 @@ function usePagination({ contentPerPage, count }) {
   const changePage = (direction) => {
     return () => {
       setPage(prevPage => {
-        if (direction === 'next') {
+        if (direction === "next") {
           if (prevPage === pageCount) return prevPage;
 
           return prevPage++
         }
 
-        if (direction === 'previous') {
+        if (direction === "previous") {
           if (prevPage === 1) return prevPage;
 
           return prevPage--;
@@ -36,8 +36,8 @@ function usePagination({ contentPerPage, count }) {
 
   return {
     totalPages: pageCount,
-    nextPage: changePage('next'),
-    prevPage: changePage('previous'),
+    nextPage: changePage("next"),
+    prevPage: changePage("previous"),
     setPage: jumpToPage,
     firstContentIndex,
     lastContentIndex,

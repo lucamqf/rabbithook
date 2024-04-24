@@ -11,16 +11,16 @@ function usePagination({ contentPerPage, count }: IUsePagination) {
   const lastContentIndex = page * contentPerPage;
   const firstContentIndex = lastContentIndex - contentPerPage;
 
-  const changePage = (direction: 'next' | 'previous') => {
+  const changePage = (direction: "next" | "previous") => {
     return () => {
       setPage(prevPage => {
-        if (direction === 'next') {
+        if (direction === "next") {
           if (prevPage === pageCount) return prevPage;
 
           return prevPage++;
         }
 
-        if (direction === 'previous') {
+        if (direction === "previous") {
           if (prevPage === 1) return prevPage;
 
           return prevPage--;
@@ -41,8 +41,8 @@ function usePagination({ contentPerPage, count }: IUsePagination) {
 
   return {
     totalPages: pageCount,
-    nextPage: changePage('next'),
-    prevPage: changePage('previous'),
+    nextPage: changePage("next"),
+    prevPage: changePage("previous"),
     setPage: jumpToPage,
     firstContentIndex,
     lastContentIndex,

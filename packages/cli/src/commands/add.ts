@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import consola from "consola";
 import { existsSync } from "node:fs";
-import ora from 'ora';
+import ora from "ora";
 import path from "pathe";
 import prompts from "prompts";
 import { EnCasings } from "src/config/casings";
@@ -13,7 +13,7 @@ import { readConfig } from "src/utils/get-config";
 import { getExtension } from "src/utils/get-extension";
 import { getSrcFolderPath } from "src/utils/get-source-folder";
 import { handleError } from "src/utils/handle-error";
-import { highlight } from 'src/utils/highlight';
+import { highlight } from "src/utils/highlight";
 import { addHook, fetchHook, getCasedHookName } from "src/utils/hook";
 import { replaceImportsToCasing } from "src/utils/hook/replace-imports-to-casing";
 

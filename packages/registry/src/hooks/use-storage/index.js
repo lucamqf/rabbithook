@@ -14,7 +14,7 @@ function useStorage(key, defaultValue, storageObject) {
 
     if (jsonValue != null) return JSON.parse(jsonValue);
 
-    if (typeof defaultValue === 'function') {
+    if (typeof defaultValue === "function") {
       return defaultValue();
     }
 

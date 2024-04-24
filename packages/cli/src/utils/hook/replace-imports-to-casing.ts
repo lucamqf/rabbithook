@@ -2,7 +2,7 @@ import { EnCasings } from "src/config/casings";
 import { getCasedHookName } from "./get-cased-hook-name";
 
 export function replaceImportsToCasing(hookCode: string, casing: EnCasings): string {
-  const importRegex = /import\s+((?:[\w*\s{},]*)\s+from\s+)?([\'\"])(.*?)\2/g;
+  const importRegex = /import\s+((?:[\w*\s{},]*)\s+from\s+)?([\"\"])(.*?)\2/g;
 
   let updatedHookCode = hookCode;
 
@@ -11,7 +11,7 @@ export function replaceImportsToCasing(hookCode: string, casing: EnCasings): str
     const originalImport = match[0];
     const importedModule = match[3];
 
-    if (importedModule.startsWith('./')) {
+    if (importedModule.startsWith("./")) {
       const originalHookName = importedModule.slice(2);
       const updatedHookName = getCasedHookName(originalHookName, casing);
       const updatedImport = originalImport.replace(`./${originalHookName}`, `./${updatedHookName}`);

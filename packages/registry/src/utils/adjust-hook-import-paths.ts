@@ -1,5 +1,5 @@
 export function adjustHookImportPaths(hookCode: string) {
-  const importRegex = /import\s+(.*?)\s+from\s+['"]\.\.\/(.*?)['"]/g;
+  const importRegex = /import\s+(.*?)\s+from\s+[""]\.\.\/(.*?)[""]/g;
 
   let updatedHookCode = hookCode;
 

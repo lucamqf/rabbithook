@@ -1,3 +1,3 @@
 export function getExtension(isTypescript: boolean): string {
-  return isTypescript ? 'ts' : 'js';
+  return isTypescript ? "ts" : "js";
 }

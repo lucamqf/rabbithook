@@ -36,7 +36,7 @@ const deepCompare = (firstValue, secondValue) => {
   return areObjectsEqual;
 }
 
-const isObject = (value) => value !== null && typeof value === 'object';
+const isObject = (value) => value !== null && typeof value === "object";
 
 
 export default useDeepCompareEffect;

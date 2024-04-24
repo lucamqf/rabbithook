@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function useArray(defaultValue) {
 	const [array, setArray] = useState(defaultValue);

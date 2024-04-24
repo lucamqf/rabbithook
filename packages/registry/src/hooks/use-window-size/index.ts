@@ -7,7 +7,7 @@ function useWindowSize() {
 		height: window.innerHeight
 	})
 
-	useEventListener('resize', () => {
+	useEventListener("resize", () => {
 		setWindowSize({
 			width: window.innerWidth,
 			height: window.innerHeight

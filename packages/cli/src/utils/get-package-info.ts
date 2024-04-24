@@ -1,7 +1,7 @@
-import { promises as fs } from 'fs'
-import { fileURLToPath } from 'node:url'
-import path from 'pathe'
-import { z } from 'zod'
+import { promises as fs } from "fs"
+import { fileURLToPath } from "node:url"
+import path from "pathe"
+import { z } from "zod"
 
 const packageJsonSchema = z.object({
   version: z.string(),
@@ -12,7 +12,7 @@ type IPackageJson = z.infer<typeof packageJsonSchema>
 
 export async function getPackageInfo(): Promise<IPackageJson> {
   try {
-    const packageJsonPath = getPackageFilePath('../package.json')
+    const packageJsonPath = getPackageFilePath("../package.json")
   
     const file = await fs.readFile(packageJsonPath, "utf8");
 
@@ -27,7 +27,7 @@ export async function getPackageInfo(): Promise<IPackageJson> {
 }
 
 function getPackageFilePath(filePath: string) {
-  const distPath = fileURLToPath(new URL('.', import.meta.url))
+  const distPath = fileURLToPath(new URL(".", import.meta.url))
 
   return path.resolve(distPath, filePath)
 }
