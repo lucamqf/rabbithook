@@ -1,4 +1,6 @@
-# Rabbithook
+<p align="center">
+ <img align="center" src="https://raw.githubusercontent.com/lucamqf/rabbithook/main/apps/www/src/public/logo.svg" width="400" />
+</p>
 
 Welcome to **Rabbithook**! This is a React hook library inspired by the Shadcn architecture, but designed specifically for managing and adding hooks to your React projects. Rabbithook provides a simple command-line interface to initialize, add, and list available hooks, making it easy to quickly integrate functionality into your React applications.
 
