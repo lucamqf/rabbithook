@@ -1,21 +1,28 @@
 import { useRef, useEffect } from "react";
 
-function useEventListener(eventType: string, callback: Function, element: Element | Window | null = window) {
-  const callbackRef = useRef(callback);
+type IEventMap = HTMLElementEventMap;
+type IEventElement = (Window & typeof globalThis) | Element | null;
+
+export function useEventListener<K extends keyof IEventMap>(
+  eventType: K,
+  callback: (ev: IEventMap[K]) => void,
+  element: IEventElement = window
+) {
+  const callbackRef = useRef<(event: IEventMap[K]) => void>(callback);
 
   useEffect(() => {
-	callbackRef.current = callback;
-  }, [callback])
+    callbackRef.current = callback;
+  }, [callback]);
 
   useEffect(() => {
-	if (!element) return;
+    const handler = (e: IEventMap[K]) => callbackRef.current(e);
 
-	const handler = (event: Event) => callbackRef.current(event);
+    element?.addEventListener(eventType as string, handler as EventListener);
 
-	element.addEventListener(eventType, handler);
-
-	return () => element.removeEventListener(eventType, handler);
-  }, [eventType, element])
+    return () => {
+      element?.removeEventListener(eventType as string, handler as EventListener);
+    };
+  }, [eventType, element]);
 }
 
 export default useEventListener;
