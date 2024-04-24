@@ -8,6 +8,7 @@ import ora from "ora";
 import { handleError } from 'src/utils/handle-error';
 import { highlight } from 'src/utils/highlight';
 import { getSrcFolderPath } from 'src/utils/get-source-folder';
+import { EnCasings } from 'src/config/casings';
 
 export const init = new Command()
   .name("init")
@@ -29,26 +30,32 @@ export const init = new Command()
           message: `Name of the ${highlight("folder")} where the hooks will be stored:`,
           initial: 'hooks',
         },
+        {
+          type: 'select',
+          name: 'casing',
+          message: `Which ${highlight("casing")} would you like your hooks to be created with?`,
+          choices: Object.values(EnCasings).map(casing => ({ title: casing, value: casing })),
+          initial: 0,
+        },
       ])
-      
+
       const spinner = ora().start("Initializing...")
 
       const sourceFolder = await getSrcFolderPath(process.cwd());
-  
+
       const config = {
         typescript: options.typescript ?? true,
         destination: options.folder ?? "hooks",
+        casing: options.casing ?? EnCasings.CAMEL_CASE,
       };
-  
+
       const configPath = path.join(sourceFolder, '..', 'hooks.json');
-      
+
       spinner.text = "Writing config file..."
+
       await fs.writeFile(configPath, JSON.stringify(config, null, 2));
-      
-      spinner.stop();
-      consola.log(
-        `${colors.green('Success!')} Project initialization completed.`,
-      )
+
+      spinner.succeed(`${colors.green('Success!')} Project initialization completed.`);
     } catch (error) {
       handleError(error)
     }
