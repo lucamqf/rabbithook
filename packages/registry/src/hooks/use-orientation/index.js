@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useEventListener from "./use-event-listener";
+import useEventListener from "../use-event-listener";
 
 const defaultValue = { angle: 0, type: "landscape-primary" };
 

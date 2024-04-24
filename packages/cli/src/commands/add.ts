@@ -82,6 +82,12 @@ async function handleDependencies({
   for (const dependency of dependencyNames) {
     const hookNameWithoutExtension = removeExtension(dependency);
 
+    const isDependencyDependenciesHandledSuccessfully = await handleDependencies({ hookName: hookNameWithoutExtension, fileExtension, casing, outputFolder });
+
+    if (!isDependencyDependenciesHandledSuccessfully) {
+      return false;
+    }
+
     const fetchedSuccessfully = await fetchAndAddHook({ hookName: hookNameWithoutExtension, fileExtension, casing, outputFolder });
 
     if (!fetchedSuccessfully) {

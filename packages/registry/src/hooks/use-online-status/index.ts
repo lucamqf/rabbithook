@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useEventListener from "./use-event-listener";
+import useEventListener from "../use-event-listener";
 
 function useOnlineStatus() {
 	const [isOnline, setOnlineStatus] = useState(navigator.onLine);
