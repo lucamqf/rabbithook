@@ -1,4 +1,4 @@
-import useEventListener from "./useEventListener";
+import useEventListener from "../use-event-listener";
 
 function useKeyStroke(key, handler) {
   useEventListener("keydown", (e) => {

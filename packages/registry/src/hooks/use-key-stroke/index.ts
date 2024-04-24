@@ -1,4 +1,4 @@
-import useEventListener from "./useEventListener";
+import useEventListener from "../use-event-listener";
 
 type IKeyStrokeKey = string | string[];
 type IKeyStrokeHandler = (e: KeyboardEvent) => void;

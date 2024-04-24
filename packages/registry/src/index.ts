@@ -2,6 +2,7 @@ import express from "express";
 import { promises as fs } from 'fs';
 import path from "path";
 import { adjustHookImportPaths } from "./utils/adjust-hook-import-paths";
+import { removeExtension, toCamelCase } from "./utils/formatters";
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.get('/hook/:hook', async (request, response) => {
 
     const [hookName, extension] = hook.split('.');
 
-    const filePath = path.join(__dirname, 'hooks', hookName, `hook.${extension}`);
+    const filePath = path.join(__dirname, 'hooks', hookName, `index.${extension}`);
 
     const file = await fs.readFile(filePath, 'utf8');
 
@@ -34,10 +35,9 @@ app.get("/hooks", async (_, response) => {
   const hooksPath = path.resolve(__dirname, "hooks");
   const rawHooks = await fs.readdir(hooksPath);
 
-  const hooks = rawHooks.map((hook) => hook.split('.')[0]);
-  const uniqueHooks = [...new Set(hooks)];
+  const hooks = rawHooks.map((hook) => toCamelCase(removeExtension(hook)));
 
-  response.json(uniqueHooks);
+  response.json(hooks);
 });
 
 app.listen(3000, () => console.log("Listening on port 3000."))

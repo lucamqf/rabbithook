@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import useEventListener from '../use-event-listener/hook';
+import useEventListener from '../use-event-listener';
 
-function useHover(ref: Element) {
-	const [hovered, setHovered] = useState(false);
+function useHover(ref) {
+  const [hovered, setHovered] = useState(false);
 
   useEventListener("mouseover", () => setHovered(true), ref);
   useEventListener("mouseout", () => setHovered(false), ref);
 
-	return hovered;
+  return hovered;
 }
 
 export default useHover;
