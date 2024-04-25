@@ -7,8 +7,8 @@ import { init } from "src/commands/init";
 import { list } from "src/commands/list";
 import { getPackageInfo } from "src/utils/get-package-info";
 
-process.on('SIGINT', () => process.exit(0))
-process.on('SIGTERM', () => process.exit(0))
+process.on("SIGINT", () => process.exit(0))
+process.on("SIGTERM", () => process.exit(0))
 
 async function main() {
   const packageInfo = await getPackageInfo();
@@ -17,9 +17,9 @@ async function main() {
     .name("hookifier")
     .description("add hooks to your project")
     .version(
-      packageInfo?.version || '1.0.0',
-      '-v, --version',
-      'display the version number',
+      packageInfo?.version || "1.0.0",
+      "-v, --version",
+      "display the version number",
     )
 
     program.addCommand(init).addCommand(add).addCommand(list);

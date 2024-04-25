@@ -5,7 +5,8 @@
     "target": "es2021",
     "module": "commonjs",
     "lib": [
-      "es6"
+      "ES6",
+      "DOM"
     ],
     "moduleResolution": "node",
     "outDir": "dist",
