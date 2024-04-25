@@ -6,8 +6,9 @@ function useQueryParams<T extends Record<string, unknown>>() {
   useEffect(() => {
       const params = {};
       const searchParams = new URLSearchParams(window.location.search);
-      for (let param of searchParams) {
-          params[param[0]] = param[1];
+      for (const param of searchParams) {
+        const typeSafeParam = params as Record<string, unknown>;
+        typeSafeParam[param[0]] = param[1];
       }
       setQueryParams(params as T);
   }, []);
