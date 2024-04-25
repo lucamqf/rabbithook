@@ -1,7 +1,7 @@
-import { consola } from 'consola'
+import { consola } from "consola"
 
 export function handleError(error: unknown) {
-  if (typeof error === 'string') {
+  if (typeof error === "string") {
     consola.error(error)
     process.exit(1)
   }
@@ -11,6 +11,6 @@ export function handleError(error: unknown) {
     process.exit(1)
   }
 
-  consola.error('Something went wrong. Please try again.')
+  consola.error("Something went wrong. Please try again.")
   process.exit(1)
 }
