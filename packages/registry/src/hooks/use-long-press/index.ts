@@ -1,11 +1,15 @@
-import React, { useEffect } from "react"
-import useEventListener from "../use-event-listener"
-import useTimeout from "./useTimeout"
+import React, { useEffect } from "react";
+import useEventListener from "../use-event-listener";
+import useTimeout from "../use-timeout";
 
-function useLongPress(ref:React.RefObject<Element>, cb: Function, { delay = 250 } = {}) {
+function useLongPress(
+  ref: React.RefObject<Element>,
+  cb: Function,
+  { delay = 250 } = {}
+) {
   const { reset, clear } = useTimeout(cb, delay);
 
-  useEffect(clear, [])
+  useEffect(clear, []);
 
   useEventListener("mousedown", reset, ref.current);
   useEventListener("touchstart", reset, ref.current);
