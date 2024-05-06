@@ -3,6 +3,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { adjustHookImportPaths } from "./utils/adjust-hook-import-paths";
 import { removeExtension, toCamelCase } from "./utils/formatters";
+import { cleanDirectives } from "./utils/clean-directives";
+import { removeFirstEmptyLine } from "./utils/remove-first-empty-line";
 
 const app = express();
 
@@ -20,10 +22,10 @@ app.get("/hook/:hook", async (request, response) => {
 
     const file = await fs.readFile(filePath, "utf8");
 
-    const fileWithFixedImports = adjustHookImportPaths(file);
+    const cleanedFile = removeFirstEmptyLine(cleanDirectives(adjustHookImportPaths(file)));
 
     response.setHeader("Content-Type", "text/plain");
-    response.send(fileWithFixedImports);
+    response.send(cleanedFile);
   } catch (error) {
     console.error(error);
     response.status(500).send("An error occurred while reading the file.");
