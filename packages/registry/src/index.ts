@@ -5,6 +5,7 @@ import { adjustHookImportPaths } from "./utils/adjust-hook-import-paths";
 import { removeExtension, toCamelCase } from "./utils/formatters";
 import { cleanDirectives } from "./utils/clean-directives";
 import { removeFirstEmptyLine } from "./utils/remove-first-empty-line";
+import { readHook } from "./utils/read-hook";
 
 const app = express();
 
@@ -18,9 +19,7 @@ app.get("/hook/:hook", async (request, response) => {
 
     const [hookName, extension] = hook.split(".");
 
-    const filePath = path.join(__dirname, "hooks", hookName, `index.${extension}`);
-
-    const file = await fs.readFile(filePath, "utf8");
+    const file = await readHook(hookName, `index.${extension}`);
 
     const cleanedFile = removeFirstEmptyLine(cleanDirectives(adjustHookImportPaths(file)));
 
@@ -40,6 +39,22 @@ app.get("/hooks", async (_, response) => {
   const hooks = rawHooks.map((hook) => toCamelCase(removeExtension(hook)));
 
   response.json(hooks);
+});
+
+app.get("/doc/:hook", async (request, response) => {
+  try {
+    const hook = request.params.hook;
+
+    const [hookName] = hook.split(".");
+
+    const file = await readHook(hookName, "doc.md");
+
+    response.setHeader("Content-Type", "text/plain");
+    response.send(file);
+  } catch (error) {
+    console.error(error);
+    response.send("")
+  }
 });
 
 app.listen(3000, () => console.log("Listening on port 3000."))

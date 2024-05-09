@@ -1,0 +1,1 @@
+Executes a function when the user long press a given element.

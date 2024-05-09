@@ -1,0 +1,1 @@
+Resolves synchronously any asynchronous function that you have, returning the data itself along with loading and error states.

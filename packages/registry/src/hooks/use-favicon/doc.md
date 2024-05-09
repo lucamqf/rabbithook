@@ -1,0 +1,1 @@
+Gain control over your page favicon.

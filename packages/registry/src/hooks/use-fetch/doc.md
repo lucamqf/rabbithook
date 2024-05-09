@@ -1,0 +1,1 @@
+Fetches a given URL synchronously. Returns the data, loading and error states.

@@ -1,0 +1,1 @@
+Works just like regular useState but with a mediation function being executed before the state changes.

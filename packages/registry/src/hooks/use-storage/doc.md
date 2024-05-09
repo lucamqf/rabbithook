@@ -1,0 +1,1 @@
+Works just like useState but with real-time integration with local or session storage. the initial state is taken from the chosen storage API and every time you change the state, this new value is automatically updated in the storage API.

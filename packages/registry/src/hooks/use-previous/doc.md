@@ -1,0 +1,1 @@
+Tracks the changes of a given state and returns always its previous value.

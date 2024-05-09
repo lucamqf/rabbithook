@@ -1,0 +1,1 @@
+Simplifies the way of dealing with pagination. Returns methods to change page, next, previous and so on.

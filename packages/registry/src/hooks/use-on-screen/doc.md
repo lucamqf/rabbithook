@@ -1,0 +1,1 @@
+Tracks whenever a given element is visible on screen.

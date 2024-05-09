@@ -1,0 +1,1 @@
+Easy way of executing a function continuously in a given delay.

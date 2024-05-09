@@ -1,0 +1,1 @@
+Return if a given media query is matching the current browser state.

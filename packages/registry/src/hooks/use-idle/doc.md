@@ -1,0 +1,1 @@
+Tracks the idle state of an user.

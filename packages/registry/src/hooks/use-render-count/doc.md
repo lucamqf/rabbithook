@@ -1,0 +1,1 @@
+Returns the number of renders of a component.

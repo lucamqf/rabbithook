@@ -1,0 +1,1 @@
+Tracks a given state giving you an entire history of its changes. Also includes methods to navigate through the history.

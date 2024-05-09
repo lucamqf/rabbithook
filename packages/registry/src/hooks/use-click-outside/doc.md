@@ -1,0 +1,1 @@
+Detects when the user clicks outside a specified element.

@@ -1,0 +1,1 @@
+Easy way of dealing with geolocation.

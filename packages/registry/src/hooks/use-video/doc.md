@@ -1,0 +1,1 @@
+Simplifies video handling, includes play, pause and reset methods. Also includes volume and playrate controls, along with fullscreen request.

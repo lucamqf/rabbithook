@@ -1,0 +1,1 @@
+Debounces any function with easy.

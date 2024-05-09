@@ -1,0 +1,1 @@
+Simple and intuitive way of declaring DOM event listeners.
