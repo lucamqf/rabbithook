@@ -10,7 +10,7 @@ type IGeolocation = {
 }
 
 
-function useGeolocation(options?: IUseGeolocationProps = {}) {
+function useGeolocation(options: IUseGeolocationProps = {}) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<GeolocationPositionError | null>(null);
 	const [data, setData] = useState({} as IGeolocation);

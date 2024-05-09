@@ -8,4 +8,7 @@ export const hookDependencies: Record<string, string[]> = {
   "use-orientation": ["use-event-listener"],
   "use-window-size": ["use-event-listener"],
   "use-fetch": ["use-async"],
+  "use-click-outside": ["use-event-listener"],
+  "use-debounce": ["use-timeout"],
+  "use-idle": ["use-event-listener"],
 };
