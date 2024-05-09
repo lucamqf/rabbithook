@@ -1,20 +1,47 @@
 import { Command } from "commander";
 import { colors } from "consola/utils";
-import fs, { promises as promiseFs } from "fs";
+import { promises as fs } from "fs";
 import ora from "ora";
 import path from "path";
 import prompts from "prompts";
 import { EnCasings } from "src/config/casings";
 import { exists } from "src/utils/exists";
-import { findProjectRoot } from "src/utils/get-root-folder";
+import { getConfigFilePath } from "src/utils/get-config-file-path";
 import { handleError } from "src/utils/handle-error";
 import { highlight } from "src/utils/highlight";
 
 export const init = new Command()
   .name("init")
   .description("Initialize config file")
-  .action(async () => {
+  .option("-g, --global", "If should be initialized as a global config", false)
+  .action(async ({ global }) => {
     try {
+      const spinner = ora().start("Initializing...")
+
+      const configFile = await getConfigFilePath(global);
+
+      if (exists(configFile)) {
+        const { overwrite } = await prompts([
+          {
+            type: "toggle",
+            name: "overwrite",
+            message: `Config file already exists. Would you like to ${highlight("overwrite")} it?`,
+            initial: false,
+            active: "yes",
+            inactive: "no",
+          },
+        ])
+
+        if (!overwrite) {
+          spinner.info(`Aborting...`);
+          return;
+        }
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      spinner.stop();
+
       const options = await prompts([
         {
           type: "toggle",
@@ -47,10 +74,10 @@ export const init = new Command()
         },
       ])
 
-      let optionsWithNextConfig = { ...options } as typeof options & { srcFolder: boolean }
+      const optionsWithNextConfig = { ...options } as typeof options & { srcFolder: boolean }
 
       if (options.next) {
-        const nextOptions = await prompts([
+        const { srcFolder } = await prompts([
           {
             type: "toggle",
             name: "srcFolder",
@@ -61,7 +88,7 @@ export const init = new Command()
           },
         ])
 
-        optionsWithNextConfig = { ...options, ...nextOptions }
+        optionsWithNextConfig.srcFolder = srcFolder;
       }
 
       const config = {
@@ -69,33 +96,15 @@ export const init = new Command()
         srcFolder: optionsWithNextConfig.srcFolder ?? true,
       }
 
-      const spinner = ora().start("Initializing...")
-
-      const rootFolder = findProjectRoot(process.cwd());
-
-      const configPath = path.join(rootFolder, "hooks.json");
-
-      if (exists(configPath)) {
-        const { overwrite } = await prompts([
-          {
-            type: "toggle",
-            name: "overwrite",
-            message: `Config file already exists. Would you like to ${highlight("overwrite")} it?`,
-            initial: false,
-            active: "yes",
-            inactive: "no",
-          },
-        ])
-
-        if (!overwrite) {
-          spinner.fail("Project initialization aborted.");
-          return;
-        }
-      }
-
       spinner.text = "Writing config file..."
 
-      await promiseFs.writeFile(configPath, JSON.stringify(config, null, 2));
+      const configDir = path.dirname(configFile);
+
+      if (!exists(configDir)) {
+        await fs.mkdir(configDir, { recursive: true })
+      }
+
+      await fs.writeFile(configFile, JSON.stringify(config, null, 2));
 
       spinner.succeed(`${colors.green("Success!")} Project initialization completed.`);
     } catch (error) {

@@ -1,9 +1,12 @@
-import { existsSync, promises as fs } from "node:fs";
+import { promises as fs } from "node:fs";
+import { homedir } from "node:os";
 import path from "pathe";
-import { z } from "zod";
-import { getSrcFolderPath } from "src/utils/get-source-folder";
-import { getPackageInfo } from "src/utils/get-package-info";
 import { EnCasings } from "src/config/casings";
+import { GLOBAL_CONFIG_DIR, GLOBAL_CONFIG_FILENAME, LOCAL_CONFIG_FILENAME } from "src/constants/config";
+import { getPackageInfo } from "src/utils/get-package-info";
+import { z } from "zod";
+import { exists } from "./exists";
+import { findProjectRoot } from "./get-root-folder";
 
 const configSchema = z.object({
   typescript: z.boolean(),
@@ -17,15 +20,18 @@ type IConfig = z.infer<typeof configSchema>;
 
 export async function readConfig(): Promise<IConfig> {
   try {
-    const sourceFolder = await getSrcFolderPath(process.cwd());
+    const rootFolder = await findProjectRoot(process.cwd());
 
-    const configPath = path.join(sourceFolder, "..", "hooks.json");
-    
+    const localConfigPath = path.join(rootFolder, LOCAL_CONFIG_FILENAME);
+    const globalConfigPath = path.join(homedir(), GLOBAL_CONFIG_DIR, GLOBAL_CONFIG_FILENAME);
+
     const packageInfo = await getPackageInfo();
-
-    if (!existsSync(configPath)) {
+    
+    if (!exists(localConfigPath) && !exists(globalConfigPath)) {
       throw new Error(`Configuration file not found. Please run "npx ${packageInfo.name}@latest init" to create one.`)
     }
+
+    const configPath = exists(localConfigPath) ? localConfigPath : globalConfigPath;
 
     const rawConfig = await fs.readFile(configPath, "utf8");
     

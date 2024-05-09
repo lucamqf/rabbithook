@@ -1,12 +1,13 @@
-import fs from "fs";
+import { promises as fs } from "fs";
 import path from "path";
 import { exists } from "./exists";
 
-export function findProjectRoot(currentDir: string) {
+export async function findProjectRoot(currentDir: string) {
   const packageJsonPath = path.join(currentDir, 'package.json');
 
   if (exists(packageJsonPath)) {
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    const rawPackageJson = await fs.readFile(packageJsonPath, 'utf8')
+    const packageJson = JSON.parse(rawPackageJson);
 
     if (packageJson.dependencies && (packageJson.dependencies.react || packageJson.dependencies.next)) {
       return currentDir;

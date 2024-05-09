@@ -106,7 +106,7 @@ export const add = new Command()
     try {
       const config = await readConfig();
       const fileExtension = getExtension(config.typescript);
-      const rootDir = findProjectRoot(process.cwd());
+      const rootDir = await findProjectRoot(process.cwd());
       const baseDir = config.srcFolder ? path.join(rootDir, "src") : rootDir; 
       const hookDir = path.join(baseDir, config.outputDir);
       const outputFolder = await createDir(hookDir);
