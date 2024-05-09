@@ -35,7 +35,6 @@ async function fetchAndAddHook({
 
   const projectLevelHookName = toKebabCase(hookName)
 
-  // const fetchedHook = await fetchHook(`${projectLevelHookName}/hook.${fileExtension}`);
   const fetchedHook = await fetchHook(`hook/${projectLevelHookName}.${fileExtension}`);
 
   if (!fetchedHook) {
