@@ -6,11 +6,12 @@ import path from "pathe";
 import prompts from "prompts";
 import { EnCasings } from "src/config/casings";
 import { hookDependencies } from "src/config/dependencies";
-import { createFolder } from "src/utils/create-folder";
+import { createDir } from "src/utils/create-folder";
 import { toKebabCase } from "src/utils/formatters";
 import { removeExtension } from "src/utils/formatters/remove-extension";
 import { readConfig } from "src/utils/get-config";
 import { getExtension } from "src/utils/get-extension";
+import { findProjectRoot } from "src/utils/get-root-folder";
 import { getSrcFolderPath } from "src/utils/get-source-folder";
 import { handleError } from "src/utils/handle-error";
 import { highlight } from "src/utils/highlight";
@@ -105,8 +106,10 @@ export const add = new Command()
     try {
       const config = await readConfig();
       const fileExtension = getExtension(config.typescript);
-      const userSrcFolder = await getSrcFolderPath(process.cwd());
-      const outputFolder = await createFolder(userSrcFolder, config.destination);
+      const rootDir = findProjectRoot(process.cwd());
+      const baseDir = config.srcFolder ? path.join(rootDir, "src") : rootDir; 
+      const hookDir = path.join(baseDir, config.outputDir);
+      const outputFolder = await createDir(hookDir);
 
       for (const hook of hooks) {
         const hookNameInCasing =  getCasedHookName(hook, config.casing);

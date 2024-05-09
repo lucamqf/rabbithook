@@ -7,8 +7,10 @@ import { EnCasings } from "src/config/casings";
 
 const configSchema = z.object({
   typescript: z.boolean(),
-  destination: z.string(),
+  outputDir: z.string(),
   casing: z.enum([EnCasings.CAMEL_CASE, EnCasings.SNAKE_CASE, EnCasings.KEBAB_CASE]),
+  next: z.boolean(),
+  srcFolder: z.boolean(),
 })
 
 type IConfig = z.infer<typeof configSchema>;
