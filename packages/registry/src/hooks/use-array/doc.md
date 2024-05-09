@@ -1,0 +1,1 @@
+Simplifies array operations using React setState API. Includes methods such as "push", "filter", "update", "remove" and "clear".

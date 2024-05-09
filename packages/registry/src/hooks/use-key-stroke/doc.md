@@ -1,0 +1,1 @@
+Easy and intuitive way of declaring keydown events to specific keys.

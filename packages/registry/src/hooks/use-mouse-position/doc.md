@@ -1,0 +1,1 @@
+Tracks the mouse position return its X and Y.

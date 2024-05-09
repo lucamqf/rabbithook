@@ -1,0 +1,1 @@
+Tracks the hover state of an element.

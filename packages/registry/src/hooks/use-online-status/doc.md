@@ -1,0 +1,1 @@
+Returns if the user has access to the internet or not.

@@ -1,0 +1,1 @@
+Just a simplier way of dealing with boolean states.

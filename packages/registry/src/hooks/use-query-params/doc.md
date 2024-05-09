@@ -1,0 +1,1 @@
+Parses and returns as an object the URL query params.

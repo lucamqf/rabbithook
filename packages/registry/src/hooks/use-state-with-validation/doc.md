@@ -1,0 +1,1 @@
+Just like useState but with the possibility to pass a validation function to it. Along with the state and setState it also returns the "isValid" property.

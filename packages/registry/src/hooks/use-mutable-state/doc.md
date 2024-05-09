@@ -1,0 +1,1 @@
+A alternative to setState that allows you to change state in a Svelte like syntax.

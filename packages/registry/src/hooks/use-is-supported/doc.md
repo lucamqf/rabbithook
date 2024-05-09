@@ -1,0 +1,1 @@
+Detects if a specific browser API is supported.

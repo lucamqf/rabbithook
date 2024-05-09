@@ -1,0 +1,1 @@
+Just like useEffect but runs only when the component mounts.

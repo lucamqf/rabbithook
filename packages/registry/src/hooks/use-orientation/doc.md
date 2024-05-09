@@ -1,0 +1,1 @@
+Returns the orientation of the device.

@@ -1,0 +1,1 @@
+Returns the width and height of a given element.

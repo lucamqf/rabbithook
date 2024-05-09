@@ -1,0 +1,1 @@
+Works just like useEffect but with objects being compared by value not reference.
