@@ -21,7 +21,10 @@
     "build:registry": "pnpm --filter rabbithook-registry build",
     "start:registry": "pnpm --filter rabbithook-registry start",
     "pub:beta": "cd packages/cli && pnpm pub:beta",
-    "pub:release": "cd packages/cli && pnpm pub:release"
+    "pub:release": "cd packages/cli && pnpm pub:release",
+    "patch:patch": "pnpm version patch && cd packages/cli && pnpm version patch && cd ../registry && pnpm version patch",
+    "patch:minor": "pnpm version minor && cd packages/cli && pnpm version minor && cd ../registry && pnpm version minor",
+    "patch:major": "pnpm version major && cd packages/cli && pnpm version major && cd ../registry && pnpm version major"
   },
   "devDependencies": {
     "typescript": "^5.4.5"
