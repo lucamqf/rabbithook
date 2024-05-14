@@ -21,6 +21,8 @@ export const init = new Command()
       const configFile = await getConfigFilePath(global);
 
       if (exists(configFile)) {
+        spinner.stop();
+
         const { overwrite } = await prompts([
           {
             type: "toggle",
@@ -37,8 +39,6 @@ export const init = new Command()
           return;
         }
       }
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
 
       spinner.stop();
 
