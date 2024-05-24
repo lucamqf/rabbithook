@@ -1,0 +1,64 @@
+---
+title: useArray
+description: Docs for useArray hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import useArrayTypescript from "../../../../../../packages/registry/src/hooks/use-array/index.ts?raw";
+import useArrayJavascript from "../../../../../../packages/registry/src/hooks/use-array/index.js?raw";
+
+useArray simplifies array operations using React setState API. Includes methods such as "push", "filter", "update", "remove" and "clear".
+
+### Installation
+
+<Code code="npx rabbithook@latest add use-array" lang="bash" frame={false} />
+
+### Usage
+<Code
+  lang="tsx"
+  title="App.tsx"
+  frame="code"
+  code={`
+    import { useArray } from "@/hooks/use-array";
+
+    function Component() {
+      const { arr, set, push, filter, update, remove, clear } = useArray([]);
+
+      return (
+        <>
+          <button onClick={() => push("Hello")}>Add</button>
+          <button onClick={() => update(0, "Bye")}>Update</button>
+          <button onClick={() => remove(0)}>Remove</button>
+          <button onClick={() => filter((item) => item === "Bye")}>Filter</button>
+          <button onClick={() => clear()}>Clear</button>
+          <div>
+            {arr.map((item, index) => (
+              <div key={index}>{item}</div>
+            ))}
+          </div>
+        </>
+      )
+    }
+  `}
+/>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-array.ts"
+      frame="code"
+      code={useArrayTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-array.js"
+      frame="code"
+      code={useArrayJavascript}
+    />
+  </TabItem>
+</Tabs>
+
