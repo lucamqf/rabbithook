@@ -13,7 +13,7 @@
     "removeComments": true,
     "baseUrl": "src",
     "allowJs": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "include": [
     "src/**/*"
