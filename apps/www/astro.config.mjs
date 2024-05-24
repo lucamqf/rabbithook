@@ -16,7 +16,7 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Guides',
-					items: (hooks ?? []).map(hook => ({ label: hook, link: `/guided/${hook}` })),
+					items: (hooks ?? []).map(hook => ({ label: hook, link: `/guides/${hook}` })),
 				},
 				{
 					label: 'Reference',
