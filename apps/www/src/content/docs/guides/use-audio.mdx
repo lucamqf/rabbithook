@@ -1,0 +1,88 @@
+---
+title: useAudio
+description: Docs for useAudio hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-audio/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-audio/index.js?raw";
+
+Simplifies audio handling, includes play, pause and reset methods. Also includes volume and playrate controls.
+
+### Installation
+<Code code="npx rabbithook@latest add use-audio" lang="bash" frame={false} />
+
+### Usage
+<Code
+  lang="tsx"
+  title="App.tsx"
+  frame="code"
+  code={`
+    import { useAudio } from "@/hooks/use-audio";
+
+    function Component() {
+      const {
+        ref,
+        isPaused,
+        currentSpeed,
+        currentVolume,
+        setVolume,
+        setSpeed,
+        play,
+        pause,
+        reset,
+        increaseSpeed,
+        decreaseSpeed,
+      } = useAudio();
+
+      return (
+        <div>
+          <audio ref={ref} src="..." />
+
+          <button onClick={play}>Play</button>
+          <button onClick={pause}>Pause</button>
+          <button onClick={reset}>Reset</button>
+          <button onClick={decreaseSpeed}>Decrease Speed</button>
+          <button onClick={increaseSpeed}>Increase Speed</button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={currentVolume}
+            onChange={(e) => setVolume(e.target.value)}
+          />
+          <input
+            type="range"
+            min="0.5"
+            max="2"
+            step="0.1"
+            value={currentSpeed}
+            onChange={(e) => setSpeed(e.target.value)}
+          />
+        </div>
+        )
+    }
+  `}
+/>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"ß
+      title="use-async.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-async.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

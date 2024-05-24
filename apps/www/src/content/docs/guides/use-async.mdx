@@ -11,7 +11,7 @@ Resolves synchronously any asynchronous function that you have, returning the da
 
 ### Installation
 
-<Code code="npx rabbithook@latest add use-array" lang="bash" frame={false} />
+<Code code="npx rabbithook@latest add use-async" lang="bash" frame={false} />
 
 ### Usage
 <Code
@@ -33,7 +33,8 @@ Resolves synchronously any asynchronous function that you have, returning the da
           {loading && <p>Loading...</p>}
           {error && <p>Error: {error.message}</p>}
           {value && <p>Value: {value}</p>}
-        </div>)
+        </div>
+      )
     }
   `}
 />
