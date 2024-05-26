@@ -1,0 +1,56 @@
+---
+title: useDebounce
+description: Docs for useDebounce hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-debounce/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-debounce/index.js?raw";
+
+Debounces any function with easy.
+
+### Installation
+<Code code="npx rabbithook@latest add use-debounce" lang="bash" frame={false} />
+
+### Usage
+<Code
+  lang="tsx"
+  title="App.tsx"
+  frame="code"
+  code={`
+import useDebounce from "@/hooks/use-debounce";
+
+function Component() {
+  const [value, setValue] = useState("");
+
+  useDebounce(() => {
+    console.log("Debounced function called with value: ", value);
+  }, 3000, [value]);
+
+  return (
+    <input value={value} onChange={event => setValue(event.target.value)} />
+  )
+}
+`}
+/>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-debounce.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-debounce.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
