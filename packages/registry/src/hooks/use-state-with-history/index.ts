@@ -11,67 +11,68 @@ type IUseStateWithHistory<T> = [
     go: (index: number) => void;
   }
 ];
+
 function useStateWithHistory<T>(defaultValue: T, { capacity = 10 } = {}):IUseStateWithHistory<T> {
-	const [value, setValue] = useState(defaultValue);
-	const historyRef = useRef([value]);
-	const pointerRef = useRef(0);
+  const [value, setValue] = useState(defaultValue);
+  const historyRef = useRef([value]);
+  const pointerRef = useRef(0);
 
-	const set = useCallback((v: T | ((currentValue: T) => T)) => {
-		const resolvedValue = v instanceof Function ? v(value) : v;
+  const set = useCallback((v: T | ((currentValue: T) => T)) => {
+    const resolvedValue = v instanceof Function ? v(value) : v;
 
-		if (historyRef.current[pointerRef.current] !== resolvedValue) {
-			if (pointerRef.current < historyRef.current.length - 1) {
-				historyRef.current.splice(pointerRef.current + 1);
-			}
+    if (historyRef.current[pointerRef.current] !== resolvedValue) {
+      if (pointerRef.current < historyRef.current.length - 1) {
+        historyRef.current.splice(pointerRef.current + 1);
+      }
 
-			historyRef.current.push(resolvedValue);
+       historyRef.current.push(resolvedValue);
 
-			while (historyRef.current.length > capacity) {
-				historyRef.current.shift();
-			}
+      while (historyRef.current.length > capacity) {
+        historyRef.current.shift();
+      }
 
-			pointerRef.current = historyRef.current.length - 1;
-		}
+      pointerRef.current = historyRef.current.length - 1;
+    }
 
-		setValue(resolvedValue);
-	}, [capacity, value])
+    setValue(resolvedValue);
+  }, [capacity, value])
 
-	const back = useCallback(() => {
-		if (pointerRef.current <= 0) return;
+  const back = useCallback(() => {
+    if (pointerRef.current <= 0) return;
 
-		pointerRef.current--;
+    pointerRef.current--;
 
-		setValue(historyRef.current[pointerRef.current]);
-	}, [])
+    setValue(historyRef.current[pointerRef.current]);
+  }, [])
 
 
-	const forward = useCallback(() => {
-		if (pointerRef.current >= historyRef.current.length - 1) return;
+  const forward = useCallback(() => {
+    if (pointerRef.current >= historyRef.current.length - 1) return;
 
-		pointerRef.current++;
+    pointerRef.current++;
 
-		setValue(historyRef.current[pointerRef.current]);
-	}, [])
+    setValue(historyRef.current[pointerRef.current]);
+  }, [])
 
-	const go = useCallback((index: number) => {
-		if (index < 0 || index >= historyRef.current.length - 1) return;
+  const go = useCallback((index: number) => {
+    if (index < 0 || index >= historyRef.current.length - 1) return;
 
-		pointerRef.current = index;
+    pointerRef.current = index;
 
-		setValue(historyRef.current[pointerRef.current]);
-	}, [])
+    setValue(historyRef.current[pointerRef.current]);
+  }, [])
 
-	return [
-		value,
-		set,
-		{
-			history: historyRef.current,
-			pointer: pointerRef.current,
-			back,
-			forward,
-			go
-		}
-	];
+  return [
+    value,
+    set,
+    {
+      history: historyRef.current,
+      pointer: pointerRef.current,
+      back,
+      forward,
+      go
+    }
+  ];
 }
 
 export default useStateWithHistory;

@@ -12,18 +12,18 @@ interface ISize {
 }
 
 function useSize(ref: RefObject<Element>) {
-	const [size, setSize] = useState({} as ISize);
+  const [size, setSize] = useState({} as ISize);
 
-	useEffect(() => {
-		if (ref.current == null) return;
+  useEffect(() => {
+    if (ref.current == null) return;
 
-		const observer = new ResizeObserver(([entry]) => setSize(entry.contentRect));
-		observer.observe(ref.current);
+    const observer = new ResizeObserver(([entry]) => setSize(entry.contentRect));
+    observer.observe(ref.current);
 
-		return () => observer.disconnect();
-	}, [])
+    return () => observer.disconnect();
+  }, [])
 
-	return size;
+  return size;
 }
 
 export default useSize;
