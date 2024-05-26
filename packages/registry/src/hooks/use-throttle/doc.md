@@ -1,1 +1,0 @@
-Throttles any function with easy.

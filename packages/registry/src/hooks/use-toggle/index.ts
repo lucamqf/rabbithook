@@ -3,13 +3,13 @@ import { useState } from "react"
 type IUseToggleReturnType = [boolean, (value?: boolean) => void];
 
 function useToggle(defaultValue: boolean): IUseToggleReturnType {
-	const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue);
 
-	function toggleValue(value?: boolean) {
-		setValue(currentValue => value ?? !currentValue);
-	}
+  function toggleValue(value?: boolean) {
+    setValue(currentValue => value ?? !currentValue);
+  }
 
-	return [value, toggleValue];
+  return [value, toggleValue];
 }
 
 export default useToggle;

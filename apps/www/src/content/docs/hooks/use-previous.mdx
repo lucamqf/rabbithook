@@ -1,0 +1,59 @@
+---
+title: usePrevious
+description: Docs for usePrevious hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-previous/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-previous/index.js?raw";
+
+Tracks the changes of a given state and returns always its previous value.
+
+### Installation
+<Code code="npx rabbithook@latest add use-previous" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import usePrevious from "@/hooks/use-previous";
+
+function Component() {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+
+  return (
+    <>
+      <p>Count: { count }</p>                   {/* 0, 1, 2, 3, ... */}
+      <p>Previous Count: { previousCount }</p>  {/* undefined, 0, 1, 2, ... */}
+      <button onClick={() => setCount(prev => prev++)}>
+        Increment
+      </button>
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-previous.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-previous.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

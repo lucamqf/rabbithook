@@ -1,0 +1,74 @@
+---
+title: useDeepCompareEffect
+description: Docs for useDeepCompareEffect hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-deep-compare-effect/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-deep-compare-effect/index.js?raw";
+
+Works just like useEffect but with objects being compared by value not reference.
+
+### Installation
+<Code code="npx rabbithook@latest add use-deep-compare-effect" lang="bash" frame={false} />
+
+### Usage
+<Code
+  lang="tsx"
+  title="App.tsx"
+  frame="code"
+  code={`
+import useDeepCompareEffect from "@/hooks/use-deep-compare-effect";
+
+function Component() {
+  const [user, setUser] = useState({
+    id: "any_id",
+    name: "any_name",
+    address: {
+      street: "any_street",
+      city: "any_city",
+      country: "any_country"
+    }
+  });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Normal effect called with user: ", user);
+  }, [user]) // Will be called every time count changes
+
+  useDeepCompareEffect(() => {
+    console.log("Deep compared effect called with user: ", user);
+  }, [user]) // Will be called only when user changes
+
+  return (
+    <>
+      <button onClick={() => setCount(prevCount => prevCount++)}>Increase Counter</button>
+      <button onClick={() => setUser(prevUser => ({...prevUser, name: "new_name" }))}>
+        Update user
+      </button>
+    </>
+  )
+}
+`}
+/>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-deep-compare-effect.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-deep-compare-effect.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

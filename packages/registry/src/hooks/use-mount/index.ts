@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
 function useMount(callback: Function) {
-	useEffect(() => {
-		callback();
-	}, [])
+  useEffect(() => {
+    callback();
+  }, [])
 }
 
 export default useMount;

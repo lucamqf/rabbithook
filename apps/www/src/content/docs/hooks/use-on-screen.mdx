@@ -1,0 +1,88 @@
+---
+title: useOnScreen
+description: Docs for useOnScreen hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-on-screen/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-on-screen/index.js?raw";
+
+Tracks whenever a given element is visible on screen.
+
+### Installation
+<Code code="npx rabbithook@latest add use-on-screen" lang="bash" frame={false} />
+
+### Usage
+<Tabs>
+  <TabItem label="Typescript">
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useOnScreen from "@/hooks/use-on-screen";
+
+function Component() {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const isVisible = useOnScreen(ref);
+
+  return (
+    <div>
+      <div style={{ height: "100vh" }}>Scroll to see the magic</div>
+      <div ref={ref}>
+        {isVisible ? "Visible" : "Not visible"}
+      </div>
+    </div>
+  );
+}
+`}
+  />
+  </TabItem>
+  <TabItem label="Javascript">
+<Code
+    lang="jsx"
+    title="App.jsx"
+    frame="code"
+    code={`
+import useOnScreen from "@/hooks/use-on-screen";
+
+function Component() {
+  const ref = useRef()
+
+  const isVisible = useOnScreen(ref);
+
+  return (
+    <div>
+      <div style={{ height: "100vh" }}>Scroll to see the magic</div>
+      <div ref={ref}>
+        {isVisible ? "Visible" : "Not visible"}
+      </div>
+    </div>
+  );
+}
+`}
+  />
+  </TabItem>
+</Tabs>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-on-screen.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-on-screen.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

@@ -1,0 +1,56 @@
+---
+title: useStateWithValidation
+description: Docs for useStateWithValidation hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-state-with-validation/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-state-with-validation/index.js?raw";
+
+Just like useState but with the possibility to pass a validation function to it. Along with the state and setState it also returns the "isValid" property.
+
+### Installation
+<Code code="npx rabbithook@latest add use-state-with-validation" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import { useStateWithValidation from "@/hooks/use-state-with-validation";
+
+function Component() {
+  const [name, setName, isNameValid] = useStateWithValidation("", name => name.length > 5);
+
+  return (
+    <>
+      <p>Name: { name }</p>
+      <p>isNameValid: { isNameValid ? "Yes" : "No" }</p>
+      <input value={name} onChange={event => setName(event.target.value)} />
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-state-with-validation.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-state-with-validation.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

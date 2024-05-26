@@ -1,0 +1,66 @@
+---
+title: usePagination
+description: Docs for usePagination hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-pagination/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-pagination/index.js?raw";
+
+Simplifies the way of dealing with pagination. Returns methods to change page, next, previous and so on.
+
+### Installation
+<Code code="npx rabbithook@latest add use-pagination" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import usePagination from "@/hooks/use-pagination";
+
+function Component() {
+  const {
+    totalPages,
+    nextPage,
+    prevPage,
+    setPage,
+    firstContentIndex, // Compine both of this properties to know
+    lastContentIndex,  // the start and end index to send to the database
+    page,
+  } = usePagination();
+
+  return (
+    <>
+      <p>Total: { totalPages }</p>
+      <p>Current Page: { page }</p>
+      <button onClick={prevPage}>Backward</button>
+      <button onClick={nextPage}>Forward</button>
+      <button onClick={() => setPage(3)}>Set page</button>
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-pagination.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-pagination.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

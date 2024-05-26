@@ -4,13 +4,13 @@ type ICompareValue = Record<string, unknown>;
 type ICompare= ICompareValue[] | ICompareValue;
 
 function useDeepCompareEffect(callback: EffectCallback, dependencies: unknown[]) {
-	const currentDependenciesRef = useRef<unknown[]>([]);
+  const currentDependenciesRef = useRef<unknown[]>([]);
 
-	if (!deepCompare(currentDependenciesRef.current as ICompare, dependencies as ICompare)) {
-		currentDependenciesRef.current = dependencies;
-	}
+  if (!deepCompare(currentDependenciesRef.current as ICompare, dependencies as ICompare)) {
+    currentDependenciesRef.current = dependencies;
+  }
 
-	useEffect(callback, [currentDependenciesRef.current])
+  useEffect(callback, [currentDependenciesRef.current])
 }
 
 const deepCompare = (firstValue: ICompare, secondValue: ICompare) => {
