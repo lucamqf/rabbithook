@@ -1,0 +1,125 @@
+---
+title: useSize
+description: Docs for useSize hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-size/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-size/index.js?raw";
+
+Returns the width and height of a given element.
+
+### Installation
+<Code code="npx rabbithook@latest add use-size" lang="bash" frame={false} />
+
+### Usage
+<Tabs>
+  <TabItem label="Typescript">
+  <Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useSize from "@/hooks/use-size";
+
+function Component() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const {
+    bottom,
+    height,
+    left,
+    right,
+    top,
+    width,
+    x,
+    y,
+  } = useSize(ref);
+
+  return (
+    <>
+      <div
+        ref={ref}
+        style={{ width: 200, height: 200, backgroundColor: "red", resize: "both" }}
+      />
+
+      <p>Top: { top }</p>
+      <p>Bottom: { bottom }</p>
+      <p>Left: { left }</p>
+      <p>Right: { right }</p>
+      <p>Width: { width }</p>
+      <p>Height: { height }</p>
+      <p>X: { x }</p>
+      <p>Y: { y }</p>
+    </>
+  );
+}
+`}
+  />
+  </TabItem>
+
+  <TabItem label="Javascript">
+  <Code
+    lang="jsx"
+    title="App.jsx"
+    frame="code"
+    code={`
+import useSize from "@/hooks/use-size";
+
+function Component() {
+  const ref = useRef();
+
+  const {
+    bottom,
+    height,
+    left,
+    right,
+    top,
+    width,
+    x,
+    y,
+  } = useSize(ref);
+
+  return (
+    <>
+      <div
+        ref={ref}
+        style={{ width: 200, height: 200, backgroundColor: "red", resize: "both" }}
+      />
+
+      <p>Top: { top }</p>
+      <p>Bottom: { bottom }</p>
+      <p>Left: { left }</p>
+      <p>Right: { right }</p>
+      <p>Width: { width }</p>
+      <p>Height: { height }</p>
+      <p>X: { x }</p>
+      <p>Y: { y }</p>
+    </>
+  );
+}
+`}
+  />
+  </TabItem>
+</Tabs>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-size.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-size.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
