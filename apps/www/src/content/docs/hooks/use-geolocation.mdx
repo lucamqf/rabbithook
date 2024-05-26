@@ -1,0 +1,60 @@
+---
+title: useGeolocation
+description: Docs for useGeolocation hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-geolocation/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-geolocation/index.js?raw";
+
+Easy way of dealing with geolocation.
+
+### Installation
+<Code code="npx rabbithook@latest add use-geolocation" lang="bash" frame={false} />
+
+### Usage
+  <Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useGeolocation from "@/hooks/use-geolocation";
+
+function Component() {
+  const { loading, error, data } = useGeolocation();
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>
+  }
+
+  return (
+    <p>{JSON.stringify(data)}</p>
+  )
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-geolocation.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-geolocation.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

@@ -1,0 +1,52 @@
+---
+title: useRenderCount
+description: Docs for useRenderCount hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-render-count/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-render-count/index.js?raw";
+
+Returns the number of renders of a component.
+
+### Installation
+<Code code="npx rabbithook@latest add use-render-count" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useRenderCount from "@/hooks/use-render-count";
+
+function Component() {
+  const renderCount = useRenderCount();
+
+  return (
+    <p>Component rendered { renderCount } times</p>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-render-count.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-render-count.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

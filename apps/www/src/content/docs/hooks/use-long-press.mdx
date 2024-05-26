@@ -1,0 +1,54 @@
+---
+title: useLongPress
+description: Docs for useLongPress hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-long-press/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-long-press/index.js?raw";
+
+Executes a function when the user long press a given element.
+
+### Installation
+<Code code="npx rabbithook@latest add use-long-press" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useLongPress from "@/hooks/use-long-press";
+
+function Component() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLongPress(ref, () => {
+    console.log("Long pressed");
+  });
+
+  return <div ref={ref} />
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-long-press.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-long-press.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

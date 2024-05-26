@@ -1,0 +1,79 @@
+---
+title: useStateWithHistory
+description: Docs for useStateWithHistory hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-state-with-history/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-state-with-history/index.js?raw";
+
+Tracks a given state giving you an entire history of its changes. Also includes methods to navigate through the history.
+
+### Installation
+<Code code="npx rabbithook@latest add use-state-with-history" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import { useStateWithHistory from "@/hooks/use-state-with-history";
+
+function Component() {
+  const [
+    count,
+    setCount,
+    {
+      history,
+      pointer,
+      back,
+      forward,
+      go,
+    }
+  ] = useStateWithHistory(0, { capacity: 20 });
+
+  return (
+    <>
+      <p>Count: { count }</p>
+      <p>History: { JSON.stringify(history) }</p>
+      <p>CurrentPosition: { JSON.stringify(pointer) }</p>
+
+      <button onClick={back}>Back</button>
+      <button onClick={forward}>Forward</button>
+      <button onClick={() => go(5)}>Go</button>
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-state-with-history.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-state-with-history.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
+### API
+- `state`: The current state.
+- `setState`: The function to update the state.
+- `stateWithHistory`: An object with the following properties:
+  - `history`: An array with the history of the state.
+  - `pointer`: The current position in the history.
+  - `back()`: Go back in the history.
+  - `forward()`: Go forward in the history.
+  - `go(n: number)`: Go to a specific position in the history.

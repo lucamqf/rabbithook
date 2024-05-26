@@ -1,0 +1,55 @@
+---
+title: useMediatedState
+description: Docs for useMediatedState hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-mediated-state/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-mediated-state/index.js?raw";
+
+Works just like regular useState but with a mediation function being executed before the state changes.
+
+### Installation
+<Code code="npx rabbithook@latest add use-mediated-state" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useMediatedState from "@/hooks/use-mediated-state";
+
+function Component() {
+  const [count, setCount] = useMediatedState(0, value => value * 2);
+
+  return (
+    <>
+      <div>Count: {count}</div> {/* 0, 2, 4, 8, ... */}
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-mediated-state.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-mediated-state.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

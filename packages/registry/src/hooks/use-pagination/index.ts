@@ -34,9 +34,9 @@ function usePagination({ contentPerPage, count }: IUsePagination) {
   const jumpToPage = (pageNumber: number) => {
     if (pageNumber > pageCount) return setPage(pageCount);
 
-		if (pageNumber < 1) return setPage(1);
+    if (pageNumber < 1) return setPage(1);
 
-		setPage(pageNumber);
+    setPage(pageNumber);
   };
 
   return {

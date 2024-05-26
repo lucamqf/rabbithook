@@ -1,0 +1,52 @@
+---
+title: useInterval
+description: Docs for useInterval hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-interval/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-interval/index.js?raw";
+
+Tracks the idle state of an user.
+
+### Installation
+<Code code="npx rabbithook@latest add use-interval" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useInterval from "@/hooks/use-interval";
+
+function Component() {
+  useInterval(() => {
+    console.log("Executed every 15 seconds");
+  }, 15 * 1000 /* 15 seconds */);
+
+  return ();
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-interval.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-interval.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

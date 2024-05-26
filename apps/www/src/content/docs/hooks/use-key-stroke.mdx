@@ -1,0 +1,56 @@
+---
+title: useKeyStroke
+description: Docs for useKeyStroke hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-key-stroke/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-key-stroke/index.js?raw";
+
+Easy and intuitive way of declaring keydown events to specific keys.
+
+### Installation
+<Code code="npx rabbithook@latest add use-key-stroke" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useKeyStroke from "@/hooks/use-key-stroke";
+
+function Component() {
+  useKeyStroke("ArrowUp", () => {
+    console.log("ArrowUp key pressed");
+  });
+
+  useKeyStroke(["W", "w", "ArrowUp"], () => {
+    console.log("Any of the specified keys were pressed");
+  });
+
+  return ();
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-key-stroke.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-key-stroke.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+

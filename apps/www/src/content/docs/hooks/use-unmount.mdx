@@ -1,0 +1,52 @@
+---
+title: useUnmount
+description: Docs for useUnmount hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-unmount/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-unmount/index.js?raw";
+
+Just like useEffect but runs only when the component unmounts.
+
+### Installation
+<Code code="npx rabbithook@latest add use-unmount" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useUnmount from "@/hooks/use-unmount";
+
+function Component() {
+  useUnmount(() => {
+    console.log("Component unmounted");
+  })
+
+  return ();
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-unmount.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-unmount.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
