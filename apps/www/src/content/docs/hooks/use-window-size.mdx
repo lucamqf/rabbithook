@@ -1,0 +1,55 @@
+---
+title: useWindowSize
+description: Docs for useWindowSize hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-window-size/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-window-size/index.js?raw";
+
+Simplifies video handling, includes play, pause and reset methods. Also includes volume and playrate controls, along with fullscreen request.
+
+### Installation
+<Code code="npx rabbithook@latest add use-window-size" lang="bash" frame={false} />
+
+### Usage
+<Code
+  lang="tsx"
+  title="App.tsx"
+  frame="code"
+  code={`
+import useWindowSize from "@/hooks/use-window-size";
+
+function Component() {
+  const { width, height } = useWindowSize();
+
+  return (
+    <>
+      <p>Width: { width }</p>
+      <p>Height: { height }</p>
+    </>
+  )
+}
+`}
+/>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"ß
+      title="use-async.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-async.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
