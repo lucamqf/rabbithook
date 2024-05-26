@@ -18,17 +18,17 @@ Detects when the user clicks outside a specified element.
   title="App.tsx"
   frame="code"
   code={`
-    import { useClickOutside } from "@/hooks/use-click-outside";
+import useClickOutside from "@/hooks/use-click-outside";
 
-    function Component() {
-      const ref = useRef<HTMLDivElement>(null);
-      const clickedOutside = useClickOutside(ref);
+function Component() {
+  const ref = useRef<HTMLDivElement>(null);
+  const clickedOutside = useClickOutside(ref);
 
-      return (
-        <div ref={ref} />
-      )
-    }
-  `}
+  return (
+    <div ref={ref} />
+  )
+}
+`}
 />
 
 ### Code
