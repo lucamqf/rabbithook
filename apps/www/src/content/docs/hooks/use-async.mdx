@@ -19,24 +19,24 @@ Resolves synchronously any asynchronous function that you have, returning the da
   title="App.tsx"
   frame="code"
   code={`
-    import { useAsync } from "@/hooks/use-async";
+import useAsync from "@/hooks/use-async";
 
-    function Component() {
-      const { value, loading, error } = useAsync(() => {
-        const response = await fetch("...");
+function Component() {
+  const { value, loading, error } = useAsync(() => {
+    const response = await fetch("...");
 
-        return response.json()
-      });
+    return response.json()
+  });
 
-      return (
-        <div>
-          {loading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
-          {value && <p>Value: {value}</p>}
-        </div>
-      )
-    }
-  `}
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {value && <p>Value: {value}</p>}
+    </div>
+  )
+}
+`}
 />
 
 ### Code
