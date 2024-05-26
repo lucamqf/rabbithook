@@ -16,12 +16,14 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Guides',
-					items: (hooks ?? []).map(hook => ({ label: hook, link: `/guides/${hook}` })),
+					items: [
+						{ label: "Getting started", link: "/guides/getting-started" }
+					]
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
-				},
+					label: 'Hooks',
+					items: (hooks ?? []).map(hook => ({ label: hook, link: `/hooks/${hook}` })),
+				}
 			],
 		}),
 	],
