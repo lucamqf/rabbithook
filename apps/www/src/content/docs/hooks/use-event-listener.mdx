@@ -1,0 +1,92 @@
+---
+title: useEventListener
+description: Docs for useEventListener hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-event-listener/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-event-listener/index.js?raw";
+
+Simple and intuitive way of declaring DOM event listeners.
+
+### Installation
+<Code code="npx rabbithook@latest add use-event-listener" lang="bash" frame={false} />
+
+### Usage
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="tsx"
+      title="App.tsx"
+      frame="code"
+      code={`
+import useEventListener from "@/hooks/use-event-listener";
+
+function Component() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEventListener("keydown", () => {
+    console.log("Window keydown event triggered");
+  });
+
+  useEventListener("keydown", () => {
+    console.log("Div keydown event triggered");
+  }, ref.current);
+
+  return (
+    <>
+      <div ref={ref} />
+    </>
+  )
+}
+`}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="jsx"
+      title="App.jsx"
+      frame="code"
+      code={`
+import useEventListener from "@/hooks/use-event-listener";
+
+function Component() {
+  const ref = useRef();
+
+  useEventListener("keydown", () => {
+    console.log("Window keydown event triggered");
+  });
+
+  useEventListener("keydown", () => {
+    console.log("Div keydown event triggered");
+  }, ref.current);
+
+  return (
+    <div ref={ref} />
+  )
+}
+`}
+    />
+  </TabItem>
+</Tabs>
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-event-listener.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-event-listener.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
