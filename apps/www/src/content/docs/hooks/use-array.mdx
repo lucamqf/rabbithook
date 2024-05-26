@@ -19,27 +19,27 @@ useArray simplifies array operations using React setState API. Includes methods 
   title="App.tsx"
   frame="code"
   code={`
-    import { useArray } from "@/hooks/use-array";
+import useArray from "@/hooks/use-array";
 
-    function Component() {
-      const { arr, set, push, filter, update, remove, clear } = useArray([]);
+function Component() {
+  const { arr, set, push, filter, update, remove, clear } = useArray([]);
 
-      return (
-        <>
-          <button onClick={() => push("Hello")}>Add</button>
-          <button onClick={() => update(0, "Bye")}>Update</button>
-          <button onClick={() => remove(0)}>Remove</button>
-          <button onClick={() => filter((item) => item === "Bye")}>Filter</button>
-          <button onClick={() => clear()}>Clear</button>
-          <div>
-            {arr.map((item, index) => (
-              <div key={index}>{item}</div>
-            ))}
-          </div>
-        </>
-      )
-    }
-  `}
+  return (
+    <>
+      <button onClick={() => push("Hello")}>Add</button>
+      <button onClick={() => update(0, "Bye")}>Update</button>
+      <button onClick={() => remove(0)}>Remove</button>
+      <button onClick={() => filter((item) => item === "Bye")}>Filter</button>
+      <button onClick={() => clear()}>Clear</button>
+      <div>
+        {arr.map((item, index) => (
+          <div key={index}>{item}</div>
+        ))}
+      </div>
+    </>
+  )
+}
+`}
 />
 
 ### Code
