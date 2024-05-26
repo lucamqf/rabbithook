@@ -1,0 +1,67 @@
+---
+title: useStorage
+description: Docs for useStorage hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-storage/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-storage/index.js?raw";
+
+Works just like useState but with real-time integration with local or session storage. the initial state is taken from the chosen storage API and every time you change the state, this new value is automatically updated in the storage API.
+
+### Installation
+<Code code="npx rabbithook@latest add use-storage" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useStorage, { useLocalStorage, useSessionStorage } from "@/hooks/use-storage";
+
+function Component() {
+  const [foo, setFoo] = useLocalStorage("foo", "");
+  /*
+    This is also valid
+    const [foo, setFoo] = useStorage("foo", "", localStorage);
+  */
+  const [bar, setBar] = useSessionStorage("bar", "",);
+    /*
+    This is also valid
+    const [bar, setBar] = useStorage("bar", "", sessionStorage);
+  */
+
+  return (
+    <>
+      <p>foo: { foo }</p>
+      <input value={foo} onChange={event => setFoo(event.target.value)} />
+
+      <p>bar: { bar }</p>
+      <input value={bar} onChange={event => setBar(event.target.value)} />
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-storage.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-storage.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
