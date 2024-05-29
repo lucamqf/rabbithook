@@ -3,8 +3,10 @@ import starlight from '@astrojs/starlight';
 
 import fs from "fs";
 import path from 'path';
+import { toCamelCase } from './src/utils/to-camel-case';
 
-const hooks = fs.readdirSync(path.resolve("..", "..", "packages", "registry", "src", "hooks"));
+const hookFiles = fs.readdirSync(path.resolve("..", "..", "packages", "registry", "src", "hooks"));
+const hooks = hookFiles ?? [];
 
 export default defineConfig({
 	integrations: [
@@ -22,7 +24,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Hooks',
-					items: (hooks ?? []).map(hook => ({ label: hook, link: `/hooks/${hook}` })),
+					items: hooks.map(hook => ({ label: toCamelCase(hook), link: `/hooks/${hook}` })),
 				}
 			],
 		}),
