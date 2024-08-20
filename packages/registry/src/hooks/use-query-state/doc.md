@@ -1,0 +1,1 @@
+Sincronizes a react state with the query params.
