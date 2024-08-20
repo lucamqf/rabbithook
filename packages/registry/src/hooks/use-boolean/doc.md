@@ -1,1 +1,1 @@
-Just a simplier way of dealing with boolean states.
+Just a simpler way of dealing with boolean states.
