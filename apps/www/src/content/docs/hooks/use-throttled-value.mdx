@@ -1,0 +1,59 @@
+---
+title: useThrottledValue
+description: Docs for useThrottledValue hook.
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import hookTypescript from "../../../../../../packages/registry/src/hooks/use-throttled-value/index.ts?raw";
+import hookJavascript from "../../../../../../packages/registry/src/hooks/use-throttled-value/index.js?raw";
+
+Watches a value and returns a throttled version of it updated at a given delay.
+
+### Installation
+<Code code="npx rabbithook@latest add use-throttled-value" lang="bash" frame={false} />
+
+### Usage
+<Code
+    lang="tsx"
+    title="App.tsx"
+    frame="code"
+    code={`
+import useThrottledValue from "@/hooks/use-throttled-value";
+
+function Component() {
+  const [state, setState] = useState("");
+
+  const throttledState = useThrottledValue(state, 2 * 1000 /* 2 seconds */);
+
+  return (
+    <>
+      <p>State: {state}</p>
+      <p>Throttled State: {throttledState}</p>
+
+      <input value={state} onChange={event => setState(event.target.value)} />
+    </>
+  );
+}
+`}
+  />
+
+### Code
+<Tabs>
+  <TabItem label="Typescript">
+    <Code
+      lang="ts"
+      title="use-throttled-value.ts"
+      frame="code"
+      code={hookTypescript}
+    />
+  </TabItem>
+  <TabItem label="Javascript">
+    <Code
+      lang="js"
+      title="use-throttled-value.js"
+      frame="code"
+      code={hookJavascript}
+    />
+  </TabItem>
+</Tabs>
+
