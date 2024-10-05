@@ -26,4 +26,4 @@ The CLI component allows users to add React hooks to their projects via a simple
 The Registry component acts as the backend service, storing and serving hooks. [Registry README](./packages/registry/README.md).
 
 ## Landing Page Project
-Under development...
+[RabbitHook](https://www.rabbithook.com.br/)
