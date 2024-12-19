@@ -13,6 +13,11 @@ function useSessionStorage<T>(key: string, defaultValue: T): IUseStorageReturnTy
 
 function useStorage<T>(key: string, defaultValue: T, storageObject: IStorageType): IUseStorageReturnType<T> {
   const [value, setValue] = useState<T | null>(() => {
+
+    if(key === null || key === undefined) {
+      return typeof defaultValue === "function" ? defaultValue() : defaultValue;
+    }
+
     const jsonValue = storageObject.getItem(key);
 
     if (jsonValue != null) return JSON.parse(jsonValue);

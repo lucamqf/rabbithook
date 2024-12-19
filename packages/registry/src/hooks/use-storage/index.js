@@ -10,6 +10,11 @@ function useSessionStorage(key, defaultValue) {
 
 function useStorage(key, defaultValue, storageObject) {
   const [value, setValue] = useState(() => {
+
+    if(key === null || key === undefined) {
+      return typeof defaultValue === "function" ? defaultValue() : defaultValue;
+    }
+    
     const jsonValue = storageObject.getItem(key);
 
     if (jsonValue != null) return JSON.parse(jsonValue);
